@@ -18,25 +18,56 @@
 
 #define BIN_NUM 10
 
-void loopCut(float wSignal, float wBackground)
+TString selection="Bplus";
+
+void loopCut()
 {
 
-   TFile* inputB = new TFile("/export/d00/scratch/jwang/nt_20140413_PAMuon_HIRun2013_PromptrecoAndRereco_v1_MuonMatching_CandBase_skim.root");
-   TFile* inputS = new TFile("/export/d00/scratch/jwang/nt_BoostedMC_20140412_Kp_TriggerMatchingMuon_CandBase_skim.root");
+   TFile* inputB = new TFile("/export/d00/scratch/jwang/nt_20140418_PAMuon_HIRun2013_PromptrecoAndRereco_v1_MuonMatching_CandBase_skim.root");
+   TFile* inputS = new TFile("/export/d00/scratch/jwang/nt_BoostedMC_20140418_Kp_TriggerMatchingMuon_CandBase_skim.root");
 
    TTree *signal = (TTree*)inputS->Get("ntKp"); 
    TTree *background = (TTree*)inputB->Get("ntKp"); 
 
    int i,j;   
-   TString basic_cut_data="(HLT_PAMu3_v1)&&abs(mumumass-3.096916)<0.15&&((Run>=210498&&Run<=211256&&abs(y+0.465)<1.93)||(Run>=211313&&Run<=211631&&abs(y-0.465)<1.93))&&(pt>10.)&&trk1Pt>0.9&&abs(mass-5.279)>0.2&&abs(mass-5.279)<0.3";
-   TString basic_cut_mc="(HLT_PAMu3_v1)&&abs(mumumass-3.096916)<0.15&&abs(y+0.465)<1.93&&(pt>10.)&&trk1Pt>0.9&&gen==22233";
-   //TString basic_cut_data="(HLT_PAMu3_v1)&&abs(mumumass-3.096916)<0.15&&((Run>=210498&&Run<=211256&&abs(y+0.465)<1.93)||(Run>=211313&&Run<=211631&&abs(y-0.465)<1.93))&&(pt>10.)&&isbesttktkmass&&abs(mass-5.279)>0.2&&abs(mass-5.279)<0.3";
-   //TString basic_cut_mc="(HLT_PAMu3_v1)&&abs(mumumass-3.096916)<0.15&&abs(y+0.465)<1.93&&(pt>10.)&&isbesttktkmass&&gen==22233";
-   TString basic_cut_gen="abs(y+0.465)<1.93&&(pt>10.)&&(isSignal==1)";
-   TString opt_cut = "chi2cl>6.81e-03&&(d0/d0Err)>3.30&&cos(dtheta)>-5.11e-01";
-   TString opt_cut1 = "(d0/d0Err)>3.30&&cos(dtheta)>-5.11e-01";
-   TString opt_cut2 = "chi2cl>6.81e-03&&cos(dtheta)>-5.11e-01";
-   TString opt_cut3 = "chi2cl>6.81e-03&&(d0/d0Err)>3.30";
+   TString basic_cut_data;
+   TString basic_cut_mc;
+   TString basic_cut_gen;
+   TString opt_cut;
+   TString opt_cut1;
+   TString opt_cut2;
+   TString opt_cut3;
+   TString opt_cut4;
+   float wSignal;
+   float wBackground;
+
+   if(selection=="Bplus")
+     {
+       basic_cut_data="(HLT_PAMu3_v1)&&abs(mumumass-3.096916)<0.15&&((Run>=210498&&Run<=211256&&abs(y+0.465)<1.93)||(Run>=211313&&Run<=211631&&abs(y-0.465)<1.93))&&(pt>10.)&&trk1Pt>0.9&&abs(mass-5.279)>0.2&&abs(mass-5.279)<0.3";
+       basic_cut_mc="(HLT_PAMu3_v1)&&abs(mumumass-3.096916)<0.15&&abs(y+0.465)<1.93&&(pt>10.)&&trk1Pt>0.9&&gen==22233";
+       basic_cut_gen="abs(y+0.465)<1.93&&(pt>10.)&&(isSignal==1)";
+       opt_cut = "chi2cl>5.22e-03&&(d0/d0Err)>3.70&&cos(dtheta)>-2.19e-01&&abs(trk1Dxy/trk1D0Err)>1.49";
+       opt_cut1 = "(d0/d0Err)>3.70&&cos(dtheta)>-2.19e-01&&abs(trk1Dxy/trk1D0Err)>1.49";
+       opt_cut2 = "chi2cl>5.22e-03&&cos(dtheta)>-2.19e-01&&abs(trk1Dxy/trk1D0Err)>1.49";
+       opt_cut3  = "chi2cl>5.22e-03&&(d0/d0Err)>3.70&&abs(trk1Dxy/trk1D0Err)>1.49";
+       opt_cut4 = "chi2cl>5.22e-03&&(d0/d0Err)>3.70&&cos(dtheta)>-2.19e-01";
+       wSignal = 626.655;
+       wBackground = 7168.33;
+     }
+
+   if(selection=="Bplus_chi2")
+     {
+       basic_cut_data="(HLT_PAMu3_v1)&&abs(mumumass-3.096916)<0.15&&((Run>=210498&&Run<=211256&&abs(y+0.465)<1.93)||(Run>=211313&&Run<=211631&&abs(y-0.465)<1.93))&&(pt>10.)&&isbestchi2&&abs(mass-5.279)>0.2&&abs(mass-5.279)<0.3";
+       basic_cut_mc="(HLT_PAMu3_v1)&&abs(mumumass-3.096916)<0.15&&abs(y+0.465)<1.93&&(pt>10.)&&isbestchi2&&gen==22233";
+       basic_cut_gen="abs(y+0.465)<1.93&&(pt>10.)&&(isSignal==1)";
+       opt_cut = "chi2cl>9.89e-03&&(d0/d0Err)>1.84&&cos(dtheta)>-8.78e-01&&abs(trk1Dxy/trk1D0Err)>1.97";
+       opt_cut1 = "(d0/d0Err)>1.84&&cos(dtheta)>-8.78e-01&&abs(trk1Dxy/trk1D0Err)>1.97";
+       opt_cut2 = "chi2cl>9.89e-03&&cos(dtheta)>-8.78e-01&&abs(trk1Dxy/trk1D0Err)>1.97";
+       opt_cut3  = "chi2cl>9.89e-03&&(d0/d0Err)>1.84&&abs(trk1Dxy/trk1D0Err)>1.97";
+       opt_cut4 = "chi2cl>9.89e-03&&(d0/d0Err)>1.84&&cos(dtheta)>-8.78e-01";
+       wSignal = 595.761;
+       wBackground = 4244.28;
+     }
 
    float BIN_MIN=0,BIN_MAX=150;
    TH1D* hmassS = new TH1D("hmassS","",50,BIN_MIN,BIN_MAX);
@@ -60,7 +91,7 @@ void loopCut(float wSignal, float wBackground)
    float MIN,STEP;
 
    MIN=0;
-   STEP=0.01;
+   STEP=0.001;
    for(i=0;i<10;i++)
      {
        variable[i]=MIN+i*STEP;
@@ -77,27 +108,30 @@ void loopCut(float wSignal, float wBackground)
    TGraph* gsignalEff_chi2 = new TGraph(10,variable,signalEff);
    TGraph* gbackgroundEff_chi2 = new TGraph(10,variable,backgroundEff);
    TGraph* gsig_chi2 = new TGraph(10,variable,sig);
-   
+   gsignalEff_chi2->SetTitle("");
+   gbackgroundEff_chi2->SetTitle("");
+   gsig_chi2->SetTitle("");
+
    TCanvas* ceffS_chi2 = new TCanvas("ceffS_chi2","",200,10,600,600);
    gsignalEff_chi2->GetYaxis()->SetTitle("Signal efficiency");
    gsignalEff_chi2->GetXaxis()->SetTitle("chi2 cut");
    gsignalEff_chi2->Draw("A*");
-   ceffS_chi2->SaveAs("plot_Bplus/SignalEff_cut_chi2.gif");
+   ceffS_chi2->SaveAs(Form("plot_%s/SignalEff_cut_chi2.pdf",selection.Data()));
    TCanvas* ceffB_chi2 = new TCanvas("ceffB_chi2","",200,10,600,600);
    gbackgroundEff_chi2->GetYaxis()->SetTitle("Background efficiency");
    gbackgroundEff_chi2->GetXaxis()->SetTitle("chi2 cut");
    gbackgroundEff_chi2->Draw("A*");
-   ceffB_chi2->SaveAs("plot_Bplus/BackgroundEff_cut_chi2.gif");
+   ceffB_chi2->SaveAs(Form("plot_%s/BackgroundEff_cut_chi2.pdf",selection.Data()));
    TCanvas* csig_chi2 = new TCanvas("csig_chi2","",200,10,600,600);
    gsig_chi2->GetYaxis()->SetTitle("Significance");
    gsig_chi2->GetXaxis()->SetTitle("chi2 cut");
    gsig_chi2->Draw("A*");
-   csig_chi2->SaveAs("plot_Bplus/Significance_cut_chi2.gif");
+   csig_chi2->SaveAs(Form("plot_%s/Significance_cut_chi2.pdf",selection.Data()));
 
    cout<<"#########################################"<<endl;
 
    MIN=0;
-   STEP=1;
+   STEP=0.5;
    for(i=0;i<10;i++)
      {
        variable[i]=MIN+i*STEP;
@@ -115,22 +149,25 @@ void loopCut(float wSignal, float wBackground)
    TGraph* gsignalEff_d0 = new TGraph(10,variable,signalEff);
    TGraph* gbackgroundEff_d0 = new TGraph(10,variable,backgroundEff);
    TGraph* gsig_d0 = new TGraph(10,variable,sig);
+   gsignalEff_d0->SetTitle("");
+   gbackgroundEff_d0->SetTitle("");
+   gsig_d0->SetTitle("");
    
    TCanvas* ceffS_d0 = new TCanvas("ceffS_d0","",200,10,600,600);
    gsignalEff_d0->GetYaxis()->SetTitle("Signal efficiency");
    gsignalEff_d0->GetXaxis()->SetTitle("d0/d0Err cut");
    gsignalEff_d0->Draw("A*");
-   ceffS_d0->SaveAs("plot_Bplus/SignalEff_cut_d0.gif");
+   ceffS_d0->SaveAs(From("plot_%s/SignalEff_cut_d0.pdf",selection.Data()));
    TCanvas* ceffB_d0 = new TCanvas("ceffB_d0","",200,10,600,600);
    gbackgroundEff_d0->GetYaxis()->SetTitle("Background efficiency");
    gbackgroundEff_d0->GetXaxis()->SetTitle("d0/d0Err cut");
    gbackgroundEff_d0->Draw("A*");
-   ceffB_d0->SaveAs("plot_Bplus/BackgroundEff_cut_d0.gif");
+   ceffB_d0->SaveAs(Form("plot_%s/BackgroundEff_cut_d0.pdf",selection.Data()));
    TCanvas* csig_d0 = new TCanvas("csig_d0","",200,10,600,600);
    gsig_d0->GetYaxis()->SetTitle("Significance");
    gsig_d0->GetXaxis()->SetTitle("d0/d0Err cut");
    gsig_d0->Draw("A*");
-   csig_d0->SaveAs("plot_Bplus/Significance_cut_d0.gif");
+   csig_d0->SaveAs(Form("plot_%s/Significance_cut_d0.pdf",selection.Data()));
 
 
    cout<<"#########################################"<<endl;
@@ -154,35 +191,38 @@ void loopCut(float wSignal, float wBackground)
    TGraph* gsignalEff_theta = new TGraph(10,variable,signalEff);
    TGraph* gbackgroundEff_theta = new TGraph(10,variable,backgroundEff);
    TGraph* gsig_theta = new TGraph(10,variable,sig);
+   gsignalEff_theta->SetTitle("");
+   gbackgroundEff_theta->SetTitle("");
+   gsig_theta->SetTitle("");
    
    TCanvas* ceffS_theta = new TCanvas("ceffS_theta","",200,10,600,600);
    gsignalEff_theta->GetYaxis()->SetTitle("Signal efficiency");
    gsignalEff_theta->GetXaxis()->SetTitle("cos(dtheta) cut");
    gsignalEff_theta->Draw("A*");
-   ceffS_theta->SaveAs("plot_Bplus/SignalEff_cut_theta.gif");
+   ceffS_theta->SaveAs(Form("plot_%s/SignalEff_cut_theta.pdf",selection.Data()));
    TCanvas* ceffB_theta = new TCanvas("ceffB_theta","",200,10,600,600);
    gbackgroundEff_theta->GetYaxis()->SetTitle("Background efficiency");
    gbackgroundEff_theta->GetXaxis()->SetTitle("cos(dtheta) cut");
    gbackgroundEff_theta->Draw("A*");
-   ceffB_theta->SaveAs("plot_Bplus/BackgroundEff_cut_theta.gif");
+   ceffB_theta->SaveAs(Form("plot_%s/BackgroundEff_cut_theta.pdf",selection.Data()));
    TCanvas* csig_theta = new TCanvas("csig_theta","",200,10,600,600);
    gsig_theta->GetYaxis()->SetTitle("Significance");
    gsig_theta->GetXaxis()->SetTitle("cos(theta) cut");
    gsig_theta->Draw("A*");
-   csig_theta->SaveAs("plot_Bplus/Significance_cut_theta.gif");
+   csig_theta->SaveAs(Form("plot_%s/Significance_cut_theta.pdf",selection.Data()));
 
    cout<<"#########################################"<<endl;
 
    MIN=0;
-   STEP=1;
+   STEP=0.3;
    for(i=0;i<10;i++)
      {
        variable[i]=MIN+i*STEP;
        char CUT[5];
        sprintf(CUT,"%.3f",variable[i]);
        cout<<CUT<<"  ";
-       background->Project("hmassBcut_trk1","mass",Form("%s&&%s&&abs(trk1Dxy/trk1D0Err)>%s",basic_cut_data.Data(),opt_cut.Data(),CUT));
-       signal->Project("hmassScut_trk1","mass",Form("%s&&%s&&abs(trk1Dxy/trk1D0Err)>%s",basic_cut_mc.Data(),opt_cut.Data(),CUT));
+       background->Project("hmassBcut_trk1","mass",Form("%s&&%s&&abs(trk1Dxy/trk1D0Err)>%s",basic_cut_data.Data(),opt_cut4.Data(),CUT));
+       signal->Project("hmassScut_trk1","mass",Form("%s&&%s&&abs(trk1Dxy/trk1D0Err)>%s",basic_cut_mc.Data(),opt_cut4.Data(),CUT));
        signalEff[i]=hmassScut_trk1->GetEntries()*1.0/hmassS->GetEntries();
        backgroundEff[i]=hmassBcut_trk1->GetEntries()*1.0/hmassB->GetEntries();
        sig[i]=signalEff[i]*wSignal/sqrt(signalEff[i]*wSignal+backgroundEff[i]*wBackground);
@@ -192,22 +232,25 @@ void loopCut(float wSignal, float wBackground)
    TGraph* gsignalEff_trk1 = new TGraph(10,variable,signalEff);
    TGraph* gbackgroundEff_trk1 = new TGraph(10,variable,backgroundEff);
    TGraph* gsig_trk1 = new TGraph(10,variable,sig);
+   gsignalEff_trk1->SetTitle("");
+   gbackgroundEff_trk1->SetTitle("");
+   gsig_trk1->SetTitle("");
    
    TCanvas* ceffS_trk1 = new TCanvas("ceffS_trk1","",200,10,600,600);
    gsignalEff_trk1->GetYaxis()->SetTitle("Signal efficiency");
    gsignalEff_trk1->GetXaxis()->SetTitle("track1 Dxy/DxyErr cut");
    gsignalEff_trk1->Draw("A*");
-   ceffS_trk1->SaveAs("plot_Bplus/SignalEff_cut_trk1.gif");
+   ceffS_trk1->SaveAs(Form("plot_%s/SignalEff_cut_trk1.pdf",selection.Data()));
    TCanvas* ceffB_trk1 = new TCanvas("ceffB_trk1","",200,10,600,600);
    gbackgroundEff_trk1->GetYaxis()->SetTitle("Background efficiency");
    gbackgroundEff_trk1->GetXaxis()->SetTitle("track1 Dxy/DxyErr cut");
    gbackgroundEff_trk1->Draw("A*");
-   ceffB_trk1->SaveAs("plot_Bplus/BackgroundEff_cut_trk1.gif");
+   ceffB_trk1->SaveAs(Form("plot_%s/BackgroundEff_cut_trk1.pdf",selection.Data()));
    TCanvas* csig_trk1 = new TCanvas("csig_trk1","",200,10,600,600);
    gsig_trk1->GetYaxis()->SetTitle("Significance");
    gsig_trk1->GetXaxis()->SetTitle("track1 Dxy/DxyErr cut");
    gsig_trk1->Draw("A*");
-   csig_trk1->SaveAs("plot_Bplus/Significance_cut_trk1.gif");
+   csig_trk1->SaveAs(Form("plot_%s/Significance_cut_trk1.pdf",selection.Data()));
 
    cout<<"#########################################"<<endl;
    

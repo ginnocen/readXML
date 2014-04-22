@@ -10,10 +10,10 @@ Method         : Cuts::CutsGA
 TMVA Release   : 4.1.2         [262402]
 ROOT Release   : 5.32/00       [335872]
 Creator        : jwang
-Date           : Sat Apr 19 14:55:34 2014
+Date           : Sun Apr 20 02:36:44 2014
 Host           : Linux lxbuild168.cern.ch 2.6.18-308.16.1.el5 #1 SMP Thu Oct 4 14:02:28 CEST 2012 x86_64 x86_64 x86_64 GNU/Linux
 Dir            : /net/hisrv0001/home/jwang/wTMVA/CMSSW_5_3_8/src/tmva/test
-Training events: 15811
+Training events: 11286
 Analysis type  : [Classification]
 
 
@@ -33,24 +33,32 @@ CutRangeMin[0]: "-1.000000e+00" [Minimum of allowed cut range (set per variable)
     CutRangeMin[1]: "-1.000000e+00"
     CutRangeMin[2]: "-1.000000e+00"
     CutRangeMin[3]: "-1.000000e+00"
+    CutRangeMin[4]: "-1.000000e+00"
+    CutRangeMin[5]: "-1.000000e+00"
 CutRangeMax[0]: "-1.000000e+00" [Maximum of allowed cut range (set per variable)]
     CutRangeMax[1]: "-1.000000e+00"
     CutRangeMax[2]: "-1.000000e+00"
     CutRangeMax[3]: "-1.000000e+00"
+    CutRangeMax[4]: "-1.000000e+00"
+    CutRangeMax[5]: "-1.000000e+00"
 VarProp[0]: "FMax" [Categorisation of cuts]
     VarProp[1]: "FMax"
     VarProp[2]: "FMax"
     VarProp[3]: "FMax"
+    VarProp[4]: "FMax"
+    VarProp[5]: "FMin"
 ##
 
 
 #VAR -*-*-*-*-*-*-*-*-*-*-*-* variables *-*-*-*-*-*-*-*-*-*-*-*-
 
-NVar 4
-chi2cl                        chi2cl                        chi2cl                        chi2cl                                                          'F'    [0.0100062899292,0.99991029501]
-d0/d0Err                      d0_D_d0Err                    d0/d0Err                      d0/d0Err                                                        'F'    [0.00401764735579,471.287017822]
+NVar 6
+chi2cl                        chi2cl                        chi2cl                        chi2cl                                                          'F'    [0.0100091788918,0.999919831753]
+d0/d0Err                      d0_D_d0Err                    d0/d0Err                      d0/d0Err                                                        'F'    [0.00881167128682,260.563476562]
 cos(dtheta)                   cos_dtheta_                   cos(dtheta)                   cos(dtheta)                                                     'F'    [-1,1]
-abs(trk1Dxy/trk1D0Err)        abs_trk1Dxy_D_trk1D0Err_      abs(trk1Dxy/trk1D0Err)        abs(trk1Dxy/trk1D0Err)                                          'F'    [0.000128236672026,130.269943237]
+abs(trk1Dxy/trk1D0Err)        abs_trk1Dxy_D_trk1D0Err_      abs(trk1Dxy/trk1D0Err)        abs(trk1Dxy/trk1D0Err)                                          'F'    [0.000186636039871,100.399757385]
+abs(trk2Dxy/trk2D0Err)        abs_trk2Dxy_D_trk2D0Err_      abs(trk2Dxy/trk2D0Err)        abs(trk2Dxy/trk2D0Err)                                          'F'    [0.000368167326087,87.153755188]
+abs(tktkmass-0.89594)         abs_tktkmass_M_0.89594_       abs(tktkmass-0.89594)         abs(tktkmass-0.89594)                                           'F'    [1.13430026261e-07,0.399818241596]
 NSpec 0
 
 
@@ -93,11 +101,11 @@ class ReadCutsGA : public IClassifierReader {
    ReadCutsGA( std::vector<std::string>& theInputVars ) 
       : IClassifierReader(),
         fClassName( "ReadCutsGA" ),
-        fNvars( 4 ),
+        fNvars( 6 ),
         fIsNormalised( false )
    {      
       // the training input variables
-      const char* inputVars[] = { "chi2cl", "d0/d0Err", "cos(dtheta)", "abs(trk1Dxy/trk1D0Err)" };
+      const char* inputVars[] = { "chi2cl", "d0/d0Err", "cos(dtheta)", "abs(trk1Dxy/trk1D0Err)", "abs(trk2Dxy/trk2D0Err)", "abs(tktkmass-0.89594)" };
 
       // sanity checks
       if (theInputVars.size() <= 0) {
@@ -121,20 +129,26 @@ class ReadCutsGA : public IClassifierReader {
       }
 
       // initialize min and max vectors (for normalisation)
-      fVmin[0] = 0.0100062899291515;
-      fVmax[0] = 0.999910295009613;
-      fVmin[1] = 0.00401764735579491;
-      fVmax[1] = 471.287017822266;
+      fVmin[0] = 0.010009178891778;
+      fVmax[0] = 0.999919831752777;
+      fVmin[1] = 0.00881167128682137;
+      fVmax[1] = 260.5634765625;
       fVmin[2] = -1;
       fVmax[2] = 1;
-      fVmin[3] = 0.000128236672026105;
-      fVmax[3] = 130.269943237305;
+      fVmin[3] = 0.000186636039870791;
+      fVmax[3] = 100.399757385254;
+      fVmin[4] = 0.000368167326087132;
+      fVmax[4] = 87.1537551879883;
+      fVmin[5] = 1.1343002626063e-07;
+      fVmax[5] = 0.399818241596222;
 
       // initialize input variable types
       fType[0] = 'F';
       fType[1] = 'F';
       fType[2] = 'F';
       fType[3] = 'F';
+      fType[4] = 'F';
+      fType[5] = 'F';
 
       // initialize constants
       Initialize();
@@ -166,15 +180,15 @@ class ReadCutsGA : public IClassifierReader {
    // normalisation of input variables
    const bool fIsNormalised;
    bool IsNormalised() const { return fIsNormalised; }
-   double fVmin[4];
-   double fVmax[4];
+   double fVmin[6];
+   double fVmax[6];
    double NormVariable( double x, double xmin, double xmax ) const {
       // normalise to output range: [-1, 1]
       return 2*(x - xmin)/(xmax - xmin) - 1.0;
    }
 
    // type of input variable: 'F' or 'I'
-   char   fType[4];
+   char   fType[6];
 
    // initialize internal variables
    void Initialize();

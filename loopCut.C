@@ -18,7 +18,7 @@
 
 #define BIN_NUM 10
 
-TString selection="Bplus";
+TString selection="Bplus_chi2";
 
 void loopCut()
 {
@@ -157,7 +157,7 @@ void loopCut()
    gsignalEff_d0->GetYaxis()->SetTitle("Signal efficiency");
    gsignalEff_d0->GetXaxis()->SetTitle("d0/d0Err cut");
    gsignalEff_d0->Draw("A*");
-   ceffS_d0->SaveAs(From("plot_%s/SignalEff_cut_d0.pdf",selection.Data()));
+   ceffS_d0->SaveAs(Form("plot_%s/SignalEff_cut_d0.pdf",selection.Data()));
    TCanvas* ceffB_d0 = new TCanvas("ceffB_d0","",200,10,600,600);
    gbackgroundEff_d0->GetYaxis()->SetTitle("Background efficiency");
    gbackgroundEff_d0->GetXaxis()->SetTitle("d0/d0Err cut");

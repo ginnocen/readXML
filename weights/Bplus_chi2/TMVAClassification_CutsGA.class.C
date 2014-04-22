@@ -10,10 +10,10 @@ Method         : Cuts::CutsGA
 TMVA Release   : 4.1.2         [262402]
 ROOT Release   : 5.32/00       [335872]
 Creator        : jwang
-Date           : Sat Apr 19 14:55:34 2014
+Date           : Sat Apr 19 15:00:51 2014
 Host           : Linux lxbuild168.cern.ch 2.6.18-308.16.1.el5 #1 SMP Thu Oct 4 14:02:28 CEST 2012 x86_64 x86_64 x86_64 GNU/Linux
 Dir            : /net/hisrv0001/home/jwang/wTMVA/CMSSW_5_3_8/src/tmva/test
-Training events: 15811
+Training events: 12232
 Analysis type  : [Classification]
 
 
@@ -47,10 +47,10 @@ VarProp[0]: "FMax" [Categorisation of cuts]
 #VAR -*-*-*-*-*-*-*-*-*-*-*-* variables *-*-*-*-*-*-*-*-*-*-*-*-
 
 NVar 4
-chi2cl                        chi2cl                        chi2cl                        chi2cl                                                          'F'    [0.0100062899292,0.99991029501]
-d0/d0Err                      d0_D_d0Err                    d0/d0Err                      d0/d0Err                                                        'F'    [0.00401764735579,471.287017822]
+chi2cl                        chi2cl                        chi2cl                        chi2cl                                                          'F'    [0.0100165577605,0.999987125397]
+d0/d0Err                      d0_D_d0Err                    d0/d0Err                      d0/d0Err                                                        'F'    [0.00151297601406,252.324356079]
 cos(dtheta)                   cos_dtheta_                   cos(dtheta)                   cos(dtheta)                                                     'F'    [-1,1]
-abs(trk1Dxy/trk1D0Err)        abs_trk1Dxy_D_trk1D0Err_      abs(trk1Dxy/trk1D0Err)        abs(trk1Dxy/trk1D0Err)                                          'F'    [0.000128236672026,130.269943237]
+abs(trk1Dxy/trk1D0Err)        abs_trk1Dxy_D_trk1D0Err_      abs(trk1Dxy/trk1D0Err)        abs(trk1Dxy/trk1D0Err)                                          'F'    [0.000157813847181,121.723083496]
 NSpec 0
 
 
@@ -121,14 +121,14 @@ class ReadCutsGA : public IClassifierReader {
       }
 
       // initialize min and max vectors (for normalisation)
-      fVmin[0] = 0.0100062899291515;
-      fVmax[0] = 0.999910295009613;
-      fVmin[1] = 0.00401764735579491;
-      fVmax[1] = 471.287017822266;
+      fVmin[0] = 0.0100165577605367;
+      fVmax[0] = 0.999987125396729;
+      fVmin[1] = 0.00151297601405531;
+      fVmax[1] = 252.324356079102;
       fVmin[2] = -1;
       fVmax[2] = 1;
-      fVmin[3] = 0.000128236672026105;
-      fVmax[3] = 130.269943237305;
+      fVmin[3] = 0.000157813847181387;
+      fVmax[3] = 121.723083496094;
 
       // initialize input variable types
       fType[0] = 'F';

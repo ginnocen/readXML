@@ -26,7 +26,7 @@
 #define BIN_NUM 100
 #define Nsigma 2
 
-TString channel = "Bzero_chi2";
+TString channel = "Bs_tktkmass";
 
 void calRatio(float* results)
 {
@@ -119,7 +119,7 @@ void calRatio(float* results)
   //Fill histogram
   TH1D* hmassS = new TH1D("hmassS","",50,5,6);
   TH1D* hmassG = new TH1D("hmassG","",50,0,10);
-  TH1D* hmassB = new TH1D("hmassB","",50,3,7);
+  TH1D* hmassB = new TH1D("hmassB","",50,0,10);
   background->Project("hmassB","mass",basic_cut_data.Data());
   signal->Project("hmassS","mass",basic_cut_mc.Data());
   generated->Project("hmassG","isSignal",basic_cut_gen.Data());
@@ -135,7 +135,7 @@ void calRatio(float* results)
   if(channel=="Bs"||channel=="Bs_chi2"||channel=="Bs_tktkmass") setparam1=5.37;
   double setparam2;
   if(channel=="Bplus" || channel=="Bplus_chi2") setparam2=0.05;
-  if(channel=="Bzero_chi2" || channel=="Bzero_tktkmass") setparam2=0.03;
+  if(channel=="Bzero_chi2" || channel=="Bzero_tktkmass") setparam2=0.02;
   if(channel=="Bs" || channel=="Bs_best" || channel=="Bs_tktkmass") setparam2=0.03;
   fmass->SetParameter(1,setparam1);
   fmass->SetParameter(2,setparam2);

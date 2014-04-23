@@ -1,4 +1,53 @@
 Bplus
+basic_cut_background="(HLT_PAMu3_v1)&&abs(mumumass-3.096916)<0.15&&((Run>=210498&&Run<=211256&&abs(y+0.465)<1.93)||(Run>=211313&&Run<=211631&&abs(y-0.465)<1.93))&&(pt>10.)&&trk1Pt>0.9&&abs(mass-5.279)>0.2&&abs(mass-5.279)<0.3";
+basic_cut_mc="(HLT_PAMu3_v1)&&abs(mumumass-3.096916)<0.15&&abs(y+0.465)<1.93&&(pt>10.)&&trk1Pt>0.9&&gen==22233";
+basic_cut_gen="abs(y+0.465)<1.93&&(pt>10.)&&(isSignal==1)";
+opt_cut = "chi2cl>5.22e-03&&(d0/d0Err)>3.70&&cos(dtheta)>-2.19e-01&&abs(trk1Dxy/trk1D0Err)>1.49";
+
+Bplus_chi2
+basic_cut_background="(HLT_PAMu3_v1)&&abs(mumumass-3.096916)<0.15&&((Run>=210498&&Run<=211256&&abs(y+0.465)<1.93)||(Run>=211313&&Run<=211631&&abs(y-0.465)<1.93))&&(pt>10.)&&isbestchi2&&abs(mass-5.279)>0.2&&abs(mass-5.279)<0.3";
+basic_cut_mc="(HLT_PAMu3_v1)&&abs(mumumass-3.096916)<0.15&&abs(y+0.465)<1.93&&(pt>10.)&&isbestchi2&&gen==22233";
+basic_cut_gen="abs(y+0.465)<1.93&&(pt>10.)&&(isSignal==1)";
+opt_cut = "chi2cl>9.89e-03&&(d0/d0Err)>1.84&&cos(dtheta)>-8.78e-01&&abs(trk1Dxy/trk1D0Err)>1.97";
+
+Bzero_tktkmass
+basic_cut_background="(HLT_PAMu3_v1)&&abs(mumumass-3.096916)<0.15&&((Run>=210498&&Run<=211256&&abs(y+0.465)<1.93)||(Run>=211313&&Run<=211631&&abs(y-0.465)<1.93))&&(pt>=10.)&&isbesttktkmass&&abs(mass-5.279)>0.2&&abs(mass-5.279)<0.3";
+basic_cut_mc= "(HLT_PAMu3_v1)&&abs(mumumass-3.096916)<0.15&&abs(y+0.465)<1.93&&(pt>=10.)&&isbesttktkmass&&(gen==22233||gen==41000)";
+basic_cut_gen= "abs(y+0.465)<1.93&&(pt>10.)&&(isSignal==4||isSignal==5)";
+opt_cut = "chi2cl>2.49e-02&&(d0/d0Err)>6.24e+00&&cos(dtheta)>6.29e-01&&abs(trk1Dxy/trk1D0Err)>1.63e+00&&abs(tktkmass-0.89594)<1.18e-01";
+
+Bzero_chi2
+basic_cut_background="(HLT_PAMu3_v1)&&abs(mumumass-3.096916)<0.15&&((Run>=210498&&Run<=211256&&abs(y+0.465)<1.93)||(Run>=211313&&Run<=211631&&abs(y-0.465)<1.93))&&(pt>10.)&&isbestchi2&&abs(mass-5.279)>0.2&&abs(mass-5.279)<0.3";
+basic_cut_mc="(HLT_PAMu3_v1)&&abs(mumumass-3.096916)<0.15&&abs(y+0.465)<1.93&&(pt>10.)&&isbestchi2&&(gen==22233||gen==41000)";
+basic_cut_gen="abs(y+0.465)<1.93&&(pt>10.)&&(isSignal==4||isSignal==5)";
+opt_cut = "chi2cl>9.15e-02&&(d0/d0Err)>3.56e+00&&cos(dtheta)>-4.04e-01&&abs(trk1Dxy/trk1D0Err)>1.30e+00&&abs(trk2Dxy/trk2D0Err)>5.90e-01&&abs(tktkmass-0.89594)<2.59e-01";
+
+Bs
+basic_cut_background="(HLT_PAMu3_v1)&&abs(mumumass-3.096916)<0.15&&((Run>=210498&&Run<=211256&&abs(y+0.465)<1.93)||(Run>=211313&&Run<=211631&&abs(y-0.465)<1.93))&&(pt>10.)&&trk1Pt>0.7&&trk2Pt>0.7&&abs(mass-5.366)>0.2&&abs(mass-5.366)<0.3";
+basic_cut_mc="(HLT_PAMu3_v1)&&abs(mumumass-3.096916)<0.15&&abs(y+0.465)<1.93&&(pt>10.)&&trk1Pt>0.7&&trk2Pt>0.7&&gen==22233";
+basic_cut_gen="abs(y+0.465)<1.93&&(pt>10.)&&(isSignal==6)";
+opt_cut = "chi2cl>3.87e-02&&(d0/d0Err)>4.38e+00&&cos(dtheta)>-7.80e-01&&abs(trk1Dxy/trk1D0Err)>3.64e-03&&abs(trk2Dxy/trk2D0Err)>2.11e-01&&abs(tktkmass-1.019455)<1.62e-02";
+
+Bs_tktkmass
+basic_cut_background="(HLT_PAMu3_v1)&&abs(mumumass-3.096916)<0.15&&((Run>=210498&&Run<=211256&&abs(y+0.465)<1.93)||(Run>=211313&&Run<=211631&&abs(y-0.465)<1.93))&&(pt>10.)&&isbesttktkmass&&abs(mass-5.366)>0.2&&abs(mass-5.366)<0.3";
+basic_cut_mc="(HLT_PAMu3_v1)&&abs(mumumass-3.096916)<0.15&&abs(y+0.465)<1.93&&(pt>10.)&&isbesttktkmass&&gen==22233";
+basic_cut_gen="abs(y+0.465)<1.93&&(pt>10.)&&(isSignal==6)";
+opt_cut = "chi2cl>1.28e-01&&(d0/d0Err)>3.08e+00&&cos(dtheta)>8.07e-01&&abs(trk1Dxy/trk1D0Err)>8.86e-01&&abs(trk2Dxy/trk2D0Err)>7.82e-01&&abs(tktkmass-1.019455)<1.77e-02";
+
+Bs_chi2
+basic_cut_background="(HLT_PAMu3_v1)&&abs(mumumass-3.096916)<0.15&&((Run>=210498&&Run<=211256&&abs(y+0.465)<1.93)||(Run>=211313&&Run<=211631&&abs(y-0.465)<1.93))&&(pt>10.)&&isbestchi2&&abs(mass-5.366)>0.2&&abs(mass-5.366)<0.3";
+basic_cut_mc="(HLT_PAMu3_v1)&&abs(mumumass-3.096916)<0.15&&abs(y+0.465)<1.93&&(pt>10.)&&isbestchi2&&gen==22233";
+basic_cut_gen="abs(y+0.465)<1.93&&(pt>10.)&&(isSignal==6)";
+opt_cut = "chi2cl>2.42e-02&&(d0/d0Err)>3.02e+00&&cos(dtheta)>-8.35e-01&&abs(trk1Dxy/trk1D0Err)>9.74e-01&&abs(trk2Dxy/trk2D0Err)>6.90e-01&&abs(tktkmass-1.019455)<9.97e-03";
+
+
+
+
+############################################################################################
+#####################################  BACK UP  ############################################
+############################################################################################
+
+Bplus
 2
 nentriesS  15984  nentriesG  91859
 # of bkg: 15640    eff*acc: 0.174006  sigma: 0.0229166  fonll expected: 3601.34
@@ -62,9 +111,13 @@ background weight: 8085.2   signal weight: 294.025
 wSignal: 294.025  wBackground: 8085.2
 maxindex: 0.51  max:9.24486
     <Bin ibin="52" effS="5.1000000000000001e-01" effB="1.3993379659950733e-02">
-      <Cuts cutMin_0="9.1495901873953275e-02" cutMax_0="1.0000000000000000e+30" cutMin_1="3.5656133769259100e+00" cutMax_1="1.0000000000000000e+30" cu\
-tMin_2="-4.0413280230157761e-01" cutMax_2="1.0000000000000000e+30" cutMin_3="1.3038071295953504e+00" cutMax_3="1.0000000000000000e+30" cutMin_4="5.898\
-1570052248466e-01" cutMax_4="1.0000000000000000e+30" cutMin_5="-1.0000000000000000e+30" cutMax_5="2.5887537195621857e-01"/>
+      <Cuts 
+cutMin_0="9.1495901873953275e-02" cutMax_0="1.0000000000000000e+30" 
+cutMin_1="3.5656133769259100e+00" cutMax_1="1.0000000000000000e+30" 
+cutMin_2="-4.0413280230157761e-01" cutMax_2="1.0000000000000000e+30" 
+cutMin_3="1.3038071295953504e+00" cutMax_3="1.0000000000000000e+30" 
+cutMin_4="5.8981570052248466e-01" cutMax_4="1.0000000000000000e+30" 
+cutMin_5="-1.0000000000000000e+30" cutMax_5="2.5887537195621857e-01"/>
     </Bin>
 
 #################################################################################3

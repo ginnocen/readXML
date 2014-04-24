@@ -25,7 +25,7 @@
 #define JPSI_MASS   3.096916
 
 #define BIN_NUM 10
-TString selection="Bzero_chi2";
+TString selection="Bzero_chi2_trkPt";
 
 void loopCutB0()
 {
@@ -72,20 +72,30 @@ void loopCutB0()
 
    if(selection=="Bzero_chi2")
      {
-       basic_cut_data="(HLT_PAMu3_v1)&&abs(mumumass-3.096916)<0.15&&((Run>=210498&&Run<=211256&&abs(y+0.465)<1.93)||(Run>=211313&&Run<=211631&&abs(y-0.465)<1.93))&&(pt>10.)&&isbestchi2&&abs(mass-5.279)>0.2&&abs(mass-5.279)<0.3";
-       basic_cut_mc="(HLT_PAMu3_v1)&&abs(mumumass-3.096916)<0.15&&abs(y+0.465)<1.93&&(pt>10.)&&isbestchi2&&(gen==22233||gen==41000)";
+       basic_cut_data="(HLT_PAMu3_v1)&&abs(mumumass-3.096916)<0.15&&((Run>=210498&&Run<=211256&&abs(y+0.465)<1.93)||(Run>=211313&&Run<=211631&&abs(y-0.465)<1.93))&&(pt>10.)&&isbestchi2&&abs(mass-5.279)>0.2&&abs(mass-5.279)<0.3&&trk1Pt>0.7&&trk2Pt>0.7";
+       basic_cut_mc="(HLT_PAMu3_v1)&&abs(mumumass-3.096916)<0.15&&abs(y+0.465)<1.93&&(pt>10.)&&isbestchi2&&(gen==22233||gen==41000)&&trk1Pt>0.7&&trk2Pt>0.7";
        basic_cut_gen="abs(y+0.465)<1.93&&(pt>10.)&&(isSignal==4||isSignal==5)";
-       opt_cut = "chi2cl>9.1495901873953275e-02&&(d0/d0Err)>3.5656133769259100e+00&&cos(dtheta)>-4.0413280230157761e-01&&abs(trk1Dxy/trk1D0Err)>1.3038071295953504e+00&&abs(trk2Dxy/trk2D0Err)>5.8981570052248466e-01&&abs(tktkmass-0.89594)<2.5887537195621857e-01";
-       opt_cut1 = "(d0/d0Err)>3.5656133769259100e+00&&cos(dtheta)>-4.0413280230157761e-01&&abs(trk1Dxy/trk1D0Err)>1.3038071295953504e+00&&abs(trk2Dxy/trk2D0Err)>5.8981570052248466e-01&&abs(tktkmass-0.89594)<2.5887537195621857e-01";
-       opt_cut2 = "chi2cl>9.1495901873953275e-02&&cos(dtheta)>-4.0413280230157761e-01&&abs(trk1Dxy/trk1D0Err)>1.3038071295953504e+00&&abs(trk2Dxy/trk2D0Err)>5.8981570052248466e-01&&abs(tktkmass-0.89594)<2.5887537195621857e-01";
-       opt_cut3 = "chi2cl>9.1495901873953275e-02&&(d0/d0Err)>3.5656133769259100e+00&&abs(trk1Dxy/trk1D0Err)>1.3038071295953504e+00&&abs(trk2Dxy/trk2D0Err)>5.8981570052248466e-01&&abs(tktkmass-0.89594)<2.5887537195621857e-01";
-       opt_cut4 = "chi2cl>9.1495901873953275e-02&&(d0/d0Err)>3.5656133769259100e+00&&cos(dtheta)>-4.0413280230157761e-01&&abs(trk2Dxy/trk2D0Err)>5.8981570052248466e-01&&abs(tktkmass-0.89594)<2.5887537195621857e-01";
-       opt_cut5 = "chi2cl>9.1495901873953275e-02&&(d0/d0Err)>3.5656133769259100e+00&&cos(dtheta)>-4.0413280230157761e-01&&abs(trk1Dxy/trk1D0Err)>1.3038071295953504e+00&&abs(tktkmass-0.89594)<2.5887537195621857e-01";
-       opt_cut6 = "chi2cl>9.1495901873953275e-02&&(d0/d0Err)>3.5656133769259100e+00&&cos(dtheta)>-4.0413280230157761e-01&&abs(trk1Dxy/trk1D0Err)>1.3038071295953504e+00&&abs(trk2Dxy/trk2D0Err)>5.8981570052248466e-01";
+       opt_cut = "chi2cl>1.1427696176323097e-01&&(d0/d0Err)>3.5266531666863732e+00&&cos(dtheta)>6.4006237112916997e-01&&abs(tktkmass-0.89594)<2.3268807851886225e-01";
 
-       wSignal = 294.025;
-       wBackground = 8085.2;
+
+       wSignal = 267.863;
+       wBackground = 2666.05;
      }
+
+   if(selection=="Bzero_chi2_trkPt")
+     {
+       basic_cut_data="(HLT_PAMu3_v1)&&abs(mumumass-3.096916)<0.15&&((Run>=210498&&Run<=211256&&abs(y+0.465)<1.93)||(Run>=211313&&Run<=211631&&abs(y-0.465)<1.93))&&(pt>10.)&&isbestchi2&&abs(mass-5.279)>0.2&&abs(mass-5.279)<0.3&&trk1Pt>0.7&&trk2Pt>0.7";
+       basic_cut_mc="(HLT_PAMu3_v1)&&abs(mumumass-3.096916)<0.15&&abs(y+0.465)<1.93&&(pt>10.)&&isbestchi2&&(gen==22233||gen==41000)&&trk1Pt>0.7&&trk2Pt>0.7";
+       basic_cut_gen="abs(y+0.465)<1.93&&(pt>10.)&&(isSignal==4||isSignal==5)";
+       opt_cut = "chi2cl>1.6536910598464905e-01&&(d0/d0Err)>4.1594866121765888e+00&&cos(dtheta)>7.5031353021307590e-01&&abs(tktkmass-0.89594)<2.3268807851886225e-01";
+       opt_cut1 = "(d0/d0Err)>4.1594866121765888e+00&&cos(dtheta)>7.5031353021307590e-01&&abs(tktkmass-0.89594)<2.3268807851886225e-01";
+       opt_cut2 = "chi2cl>1.6536910598464905e-01&&cos(dtheta)>7.5031353021307590e-01&&abs(tktkmass-0.89594)<2.3268807851886225e-01";
+       opt_cut3 = "chi2cl>1.6536910598464905e-01&&(d0/d0Err)>4.1594866121765888e+00&&abs(tktkmass-0.89594)<2.3268807851886225e-01";
+       opt_cut6 = "chi2cl>1.6536910598464905e-01&&(d0/d0Err)>4.1594866121765888e+00&&cos(dtheta)>7.5031353021307590e-01";
+       wSignal = 228.097;
+       wBackground = 3315.63;
+     }
+
 
    float BIN_MIN=0,BIN_MAX=150;
    TH1D* hmassS = new TH1D("hmassS","",50,BIN_MIN,BIN_MAX);
@@ -110,7 +120,7 @@ void loopCutB0()
    float MIN,STEP;
 
    MIN=0;
-   STEP=0.02;
+   STEP=0.05;
    for(i=0;i<10;i++)
      {
        variable[i]=MIN+i*STEP;
@@ -192,7 +202,8 @@ void loopCutB0()
    cout<<"#########################################"<<endl;
 
 
-   MIN=-1;
+   MIN=0;
+   if(selection=="Bzero_chi2") MIN=-1;
    STEP=0.1;
    for(i=0;i<10;i++)
      {
@@ -232,7 +243,7 @@ void loopCutB0()
    csig_theta->SaveAs(Form("plot_%s/Significance_cut_theta.pdf",selection.Data()));
 
    cout<<"#########################################"<<endl;
-
+   /*
    MIN=0;
    STEP=0.3;
    for(i=0;i<10;i++)
@@ -313,7 +324,7 @@ void loopCutB0()
    gsig_trk2->Draw("A*");
    csig_trk2->SaveAs(Form("plot_%s/Significance_cut_trk2.pdf",selection.Data()));
 
-
+   */
    cout<<"#########################################"<<endl;
 
    MIN=0.01;

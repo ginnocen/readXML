@@ -18,7 +18,7 @@
 
 #define BIN_NUM 10
 
-TString selection="Bplus_chi2";
+TString selection="Bplus_chi2_trkPt";
 
 void loopCut()
 {
@@ -69,6 +69,21 @@ void loopCut()
        wBackground = 4244.28;
      }
 
+   if(selection=="Bplus_chi2_trkPt")
+     {
+       basic_cut_data="(HLT_PAMu3_v1)&&abs(mumumass-3.096916)<0.15&&((Run>=210498&&Run<=211256&&abs(y+0.465)<1.93)||(Run>=211313&&Run<=211631&&abs(y-0.465)<1.93))&&(pt>10.)&&isbestchi2&&abs(mass-5.279)>0.2&&abs(mass-5.279)<0.3&&trk1Pt>0.9";
+       basic_cut_mc="(HLT_PAMu3_v1)&&abs(mumumass-3.096916)<0.15&&abs(y+0.465)<1.93&&(pt>10.)&&isbestchi2&&gen==22233&&trk1Pt>0.9";
+       basic_cut_gen="abs(y+0.465)<1.93&&(pt>10.)&&(isSignal==1)";
+       opt_cut = "chi2cl>1.3283188406344560e-02&&(d0/d0Err)>3.4071262144478291e+00&&cos(dtheta)>-3.4655284177017442e-01";
+       opt_cut1 = "(d0/d0Err)>3.4071262144478291e+00&&cos(dtheta)>-3.4655284177017442e-01";
+       opt_cut2 = "chi2cl>1.3283188406344560e-02&&cos(dtheta)>-3.4655284177017442e-01";
+       opt_cut3 = "chi2cl>1.3283188406344560e-02&&(d0/d0Err)>3.4071262144478291e+00";
+       opt_cut4 = "chi2cl>1.3283188406344560e-02&&(d0/d0Err)>3.4071262144478291e+00&&cos(dtheta)>-3.4655284177017442e-01";
+
+       wSignal = 543.54;
+       wBackground = 1774.49;
+     }
+
    float BIN_MIN=0,BIN_MAX=150;
    TH1D* hmassS = new TH1D("hmassS","",50,BIN_MIN,BIN_MAX);
    TH1D* hmassB = new TH1D("hmassB","",50,BIN_MIN,BIN_MAX);
@@ -91,7 +106,8 @@ void loopCut()
    float MIN,STEP;
 
    MIN=0;
-   STEP=0.001;
+   STEP=0.003;
+   if(selection=="Bplus_chi2") STEP=0.002;
    for(i=0;i<10;i++)
      {
        variable[i]=MIN+i*STEP;
@@ -173,7 +189,8 @@ void loopCut()
    cout<<"#########################################"<<endl;
 
    MIN=-1;
-   STEP=0.1;
+   STEP=0.2;
+   if(selection=="Bplus_chi2") STEP=0.03;
    for(i=0;i<10;i++)
      {
        variable[i]=MIN+i*STEP;

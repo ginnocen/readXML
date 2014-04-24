@@ -1,12 +1,11 @@
 Bplus_chi2_trkPt
 opt_cut = "chi2cl>1.32e-02&&(d0/d0Err)>3.41&&cos(dtheta)>-3.46e-01";
 
-Bzero_chi2
-opt_cut = "chi2cl>1.90e-01&&(d0/d0Err)>8.95&&cos(dtheta)>8.50e-01&&abs(tktkmass-0.89594)<2.48e-01";
+Bzero_chi2_trkPt
+opt_cut = "chi2cl>1.14e-01e-01&&(d0/d0Err)>3.53&&cos(dtheta)>6.40e-01&&abs(tktkmass-0.89594)<2.33e-01";
 
 Bs_chi2_trkPt
 opt_cut = "chi2cl>3.71e-02&&(d0/d0Err)>3.37&&cos(dtheta)>2.60e-01&&abs(tktkmass-1.019455)<1.55e-02";
-
 
 
 
@@ -34,6 +33,18 @@ nentriesS  8429  nentriesG  88812
 background weight: 8085.08   signal weight: 294.025
 wSignal: 294.025  wBackground: 8085.08
 maxindex: 0.54  max:9.06653
+
+B0_chi2_trkPt
+nentriesS  7679  nentriesG  88812
+# of bkg: 4238    eff*acc: 0.0864635  sigma: 0.0314541  fonll expected: 3097.99
+background weight: 2666.05   signal weight: 267.863
+wSignal: 267.863  wBackground: 2666.05
+maxindex: 0.73  max:11.0163
+      <Cuts 
+cutMin_0="1.1427696176323097e-01" cutMax_0="1.0000000000000000e+30" 
+cutMin_1="3.5266531666863732e+00" cutMax_1="1.0000000000000000e+30" 
+cutMin_2="6.4006237112916997e-01" cutMax_2="1.0000000000000000e+30" 
+cutMin_3="-1.0000000000000000e+30" cutMax_3="2.3268807851886225e-01"/>
 
 
 

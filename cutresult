@@ -2,7 +2,7 @@ Bplus_chi2_trkPt
 opt_cut = "chi2cl>1.32e-02&&(d0/d0Err)>3.41&&cos(dtheta)>-3.46e-01";
 
 Bzero_chi2_trkPt
-opt_cut = "chi2cl>1.14e-01e-01&&(d0/d0Err)>3.53&&cos(dtheta)>6.40e-01&&abs(tktkmass-0.89594)<2.33e-01";
+opt_cut = "chi2cl>1.65e-01&&(d0/d0Err)>4.16&&cos(dtheta)>7.50e-01&&abs(tktkmass-0.89594)<2.33e-01";
 
 Bs_chi2_trkPt
 opt_cut = "chi2cl>3.71e-02&&(d0/d0Err)>3.37&&cos(dtheta)>2.60e-01&&abs(tktkmass-1.019455)<1.55e-02";
@@ -12,13 +12,27 @@ opt_cut = "chi2cl>3.71e-02&&(d0/d0Err)>3.37&&cos(dtheta)>2.60e-01&&abs(tktkmass-
 ############################################################################################
 #####################################  BACK UP  ############################################
 ############################################################################################
+Bplus_chi2_trkPt
+nentriesS  13864  nentriesG  91859
+# of bkg: 3829    eff*acc: 0.150927  sigma: 0.0231717  fonll expected: 3601.34
+background weight: 1774.49   signal weight: 543.54
+wSignal: 543.54  wBackground: 1774.49
+maxindex: 0.87  max:18.9444
+    <Bin ibin="88" effS="8.7000000000000000e-01" effB="8.4639497101306915e-02">
+      <Cuts 
+cutMin_0="1.3283188406344560e-02" cutMax_0="1.0000000000000000e+30" 
+cutMin_1="3.4071262144478291e+00" cutMax_1="1.0000000000000000e+30" 
+cutMin_2="-3.4655284177017442e-01" cutMax_2="1.0000000000000000e+30" 
+cutMin_3="-9.5605684710704653e-01" cutMax_3="1.0000000000000000e+30"/>
+    </Bin>
+
+
 Bs_chi2_trkPt
 nentriesS  9592  nentriesG  83982
 # of bkg: 2392    eff*acc: 0.114215  sigma: 0.0149726  fonll expected: 448.565
 background weight: 716.288   signal weight: 51.2328
 wSignal: 51.2328  wBackground: 716.288
 maxindex: 0.73  max:5.49148
-
     <Bin ibin="74" effS="7.2999999999999998e-01" effB="1.2541806325316429e-02">
       <Cuts 
 cutMin_0="3.7135302389090241e-02" cutMax_0="1.0000000000000000e+30" 
@@ -27,24 +41,19 @@ cutMin_2="2.5997067060605700e-01" cutMax_2="1.0000000000000000e+30"
 cutMin_3="-1.0000000000000000e+30" cutMax_3="1.5508735352954923e-02"/>
     </Bin>
 
-B0_chi2
-nentriesS  8429  nentriesG  88812
-# of bkg: 13292    eff*acc: 0.0949083  sigma: 0.0304133  fonll expected: 3097.99
-background weight: 8085.08   signal weight: 294.025
-wSignal: 294.025  wBackground: 8085.08
-maxindex: 0.54  max:9.06653
-
 B0_chi2_trkPt
-nentriesS  7679  nentriesG  88812
-# of bkg: 4238    eff*acc: 0.0864635  sigma: 0.0314541  fonll expected: 3097.99
-background weight: 2666.05   signal weight: 267.863
-wSignal: 267.863  wBackground: 2666.05
-maxindex: 0.73  max:11.0163
+nentriesS  6539  nentriesG  88812
+# of bkg: 4238    eff*acc: 0.0736274  sigma: 0.0391178  fonll expected: 3097.99
+background weight: 3315.63   signal weight: 228.097
+wSignal: 228.097  wBackground: 3315.63
+maxindex: 0.68  max:9.39674
+    <Bin ibin="69" effS="6.8000000000000005e-01" effB="3.5394053906202316e-02">
       <Cuts 
-cutMin_0="1.1427696176323097e-01" cutMax_0="1.0000000000000000e+30" 
-cutMin_1="3.5266531666863732e+00" cutMax_1="1.0000000000000000e+30" 
-cutMin_2="6.4006237112916997e-01" cutMax_2="1.0000000000000000e+30" 
+cutMin_0="1.6536910598464905e-01" cutMax_0="1.0000000000000000e+30" 
+cutMin_1="4.1594866121765888e+00" cutMax_1="1.0000000000000000e+30" 
+cutMin_2="7.5031353021307590e-01" cutMax_2="1.0000000000000000e+30" 
 cutMin_3="-1.0000000000000000e+30" cutMax_3="2.3268807851886225e-01"/>
+    </Bin>
 
 
 

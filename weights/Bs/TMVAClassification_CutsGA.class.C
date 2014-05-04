@@ -10,7 +10,7 @@ Method         : Cuts::CutsGA
 TMVA Release   : 4.1.2         [262402]
 ROOT Release   : 5.32/00       [335872]
 Creator        : jwang
-Date           : Sat Apr 19 19:47:22 2014
+Date           : Tue Apr 22 18:46:01 2014
 Host           : Linux lxbuild168.cern.ch 2.6.18-308.16.1.el5 #1 SMP Thu Oct 4 14:02:28 CEST 2012 x86_64 x86_64 x86_64 GNU/Linux
 Dir            : /net/hisrv0001/home/jwang/wTMVA/CMSSW_5_3_8/src/tmva/test
 Training events: 9468

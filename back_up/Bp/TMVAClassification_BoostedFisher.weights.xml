@@ -1,0 +1,226 @@
+<?xml version="1.0"?>
+<MethodSetup Method="Boost::BoostedFisher">
+  <GeneralInfo>
+    <Info name="TMVA Release" value="4.1.2 [262402]"/>
+    <Info name="ROOT Release" value="5.32/00 [335872]"/>
+    <Info name="Creator" value="jwang"/>
+    <Info name="Date" value="Thu Feb 27 16:55:05 2014"/>
+    <Info name="Host" value="Linux lxbuild168.cern.ch 2.6.18-308.16.1.el5 #1 SMP Thu Oct 4 14:02:28 CEST 2012 x86_64 x86_64 x86_64 GNU/Linux"/>
+    <Info name="Dir" value="/net/hisrv0001/home/jwang/wTMVA/CMSSW_5_3_8/src/tmva/test"/>
+    <Info name="Training events" value="27496"/>
+    <Info name="TrainingTime" value="1.90628409e+00"/>
+    <Info name="AnalysisType" value="Classification"/>
+  </GeneralInfo>
+  <Options>
+    <Option name="V" modified="Yes">False</Option>
+    <Option name="VerbosityLevel" modified="No">Default</Option>
+    <Option name="VarTransform" modified="No">None</Option>
+    <Option name="H" modified="Yes">True</Option>
+    <Option name="CreateMVAPdfs" modified="No">False</Option>
+    <Option name="IgnoreNegWeightsInTraining" modified="No">False</Option>
+    <Option name="Boost_Num" modified="Yes">20</Option>
+    <Option name="Boost_MonitorMethod" modified="No">True</Option>
+    <Option name="Boost_DetailedMonitoring" modified="Yes">False</Option>
+    <Option name="Boost_Type" modified="Yes">AdaBoost</Option>
+    <Option name="Boost_MethodWeightType" modified="No">ByError</Option>
+    <Option name="Boost_RecalculateMVACut" modified="No">True</Option>
+    <Option name="Boost_AdaBoostBeta" modified="Yes">2.000000e-01</Option>
+    <Option name="Boost_Transform" modified="Yes">log</Option>
+    <Option name="Boost_RandomSeed" modified="No">0</Option>
+  </Options>
+  <Variables NVar="4">
+    <Variable VarIndex="0" Expression="chi2cl" Label="chi2cl" Title="chi2cl" Unit="" Internal="chi2cl" Type="F" Min="1.00075090e-02" Max="9.99973297e-01"/>
+    <Variable VarIndex="1" Expression="d0/d0Err" Label="d0/d0Err" Title="d0/d0Err" Unit="" Internal="d0_D_d0Err" Type="F" Min="6.07176917e-04" Max="2.63074310e+02"/>
+    <Variable VarIndex="2" Expression="dtheta" Label="dtheta" Title="dtheta" Unit="" Internal="dtheta" Type="F" Min="2.98566624e-06" Max="3.14157891e+00"/>
+    <Variable VarIndex="3" Expression="abs(trk1Dxy/trk1D0Err)" Label="abs(trk1Dxy/trk1D0Err)" Title="abs(trk1Dxy/trk1D0Err)" Unit="" Internal="abs_trk1Dxy_D_trk1D0Err_" Type="F" Min="3.26307127e-05" Max="9.43902435e+01"/>
+  </Variables>
+  <Spectators NSpec="0"/>
+  <Classes NClass="2">
+    <Class Name="Signal" Index="0"/>
+    <Class Name="Background" Index="1"/>
+  </Classes>
+  <Transformations NTransformations="0"/>
+  <MVAPdfs/>
+  <Weights NMethods="20">
+    <Method Index="0" Weight="1.4739875714376877e-01" MethodSigCut="-2.6831198486923558e-02" MethodSigCutOrientation="1.0000000000000000e+00" MethodTypeName="Fisher" MethodName="BoostedFisher_B0000" JobName="TMVAClassification" Options="~H:~!V:~Boost_Num=20:~Boost_Transform=log:~Boost_Type=AdaBoost:~Boost_AdaBoostBeta=0.2:~!Boost_DetailedMonitoring" UseMainMethodTransformation="true">
+      <Weights NCoeff="5">
+        <Coefficient Index="0" Value="-1.1105781720492232e-01"/>
+        <Coefficient Index="1" Value="2.6028430686458656e-02"/>
+        <Coefficient Index="2" Value="5.7332058833736441e-03"/>
+        <Coefficient Index="3" Value="-9.4281112318494592e-03"/>
+        <Coefficient Index="4" Value="1.1264338303163750e-02"/>
+      </Weights>
+    </Method>
+    <Method Index="1" Weight="1.1855578515722724e-01" MethodSigCut="-2.7837721084134348e-02" MethodSigCutOrientation="1.0000000000000000e+00" MethodTypeName="Fisher" MethodName="BoostedFisher_B0001" JobName="TMVAClassification" Options="~H:~!V:~Boost_Num=20:~Boost_Transform=log:~Boost_Type=AdaBoost:~Boost_AdaBoostBeta=0.2:~!Boost_DetailedMonitoring" UseMainMethodTransformation="true">
+      <Weights NCoeff="5">
+        <Coefficient Index="0" Value="-1.2090140462821047e-01"/>
+        <Coefficient Index="1" Value="4.7000404250271369e-02"/>
+        <Coefficient Index="2" Value="6.5019058654278792e-03"/>
+        <Coefficient Index="3" Value="-2.1304494015785849e-02"/>
+        <Coefficient Index="4" Value="1.8419957629866771e-02"/>
+      </Weights>
+    </Method>
+    <Method Index="2" Weight="1.0467773661831040e-01" MethodSigCut="3.6469661810534348e+00" MethodSigCutOrientation="1.0000000000000000e+00" MethodTypeName="Fisher" MethodName="BoostedFisher_B0002" JobName="TMVAClassification" Options="~H:~!V:~Boost_Num=20:~Boost_Transform=log:~Boost_Type=AdaBoost:~Boost_AdaBoostBeta=0.2:~!Boost_DetailedMonitoring" UseMainMethodTransformation="true">
+      <Weights NCoeff="5">
+        <Coefficient Index="0" Value="-1.1854104404286772e-01"/>
+        <Coefficient Index="1" Value="7.4499625972659189e-02"/>
+        <Coefficient Index="2" Value="6.0417186786117776e-03"/>
+        <Coefficient Index="3" Value="-4.0488545418136339e-02"/>
+        <Coefficient Index="4" Value="2.6520739134259268e-02"/>
+      </Weights>
+    </Method>
+    <Method Index="3" Weight="8.3742189436277023e-02" MethodSigCut="3.8933938311121725e+00" MethodSigCutOrientation="1.0000000000000000e+00" MethodTypeName="Fisher" MethodName="BoostedFisher_B0003" JobName="TMVAClassification" Options="~H:~!V:~Boost_Num=20:~Boost_Transform=log:~Boost_Type=AdaBoost:~Boost_AdaBoostBeta=0.2:~!Boost_DetailedMonitoring" UseMainMethodTransformation="true">
+      <Weights NCoeff="5">
+        <Coefficient Index="0" Value="-1.1947259327788920e-01"/>
+        <Coefficient Index="1" Value="9.8432663526284589e-02"/>
+        <Coefficient Index="2" Value="7.3633509589465006e-03"/>
+        <Coefficient Index="3" Value="-6.5836387791606235e-02"/>
+        <Coefficient Index="4" Value="2.6164697153061710e-02"/>
+      </Weights>
+    </Method>
+    <Method Index="4" Weight="7.9164103293411253e-02" MethodSigCut="3.1180156113714497e-02" MethodSigCutOrientation="1.0000000000000000e+00" MethodTypeName="Fisher" MethodName="BoostedFisher_B0004" JobName="TMVAClassification" Options="~H:~!V:~Boost_Num=20:~Boost_Transform=log:~Boost_Type=AdaBoost:~Boost_AdaBoostBeta=0.2:~!Boost_DetailedMonitoring" UseMainMethodTransformation="true">
+      <Weights NCoeff="5">
+        <Coefficient Index="0" Value="-1.1007117425213590e-01"/>
+        <Coefficient Index="1" Value="1.2141730001748294e-01"/>
+        <Coefficient Index="2" Value="8.2237395306334043e-03"/>
+        <Coefficient Index="3" Value="-9.4989098746567038e-02"/>
+        <Coefficient Index="4" Value="2.4405073625885058e-02"/>
+      </Weights>
+    </Method>
+    <Method Index="5" Weight="5.9387890290893065e-02" MethodSigCut="3.9915104689882552e+00" MethodSigCutOrientation="1.0000000000000000e+00" MethodTypeName="Fisher" MethodName="BoostedFisher_B0005" JobName="TMVAClassification" Options="~H:~!V:~Boost_Num=20:~Boost_Transform=log:~Boost_Type=AdaBoost:~Boost_AdaBoostBeta=0.2:~!Boost_DetailedMonitoring" UseMainMethodTransformation="true">
+      <Weights NCoeff="5">
+        <Coefficient Index="0" Value="-6.9369708981916203e-02"/>
+        <Coefficient Index="1" Value="1.1895615590864303e-01"/>
+        <Coefficient Index="2" Value="5.9917781740590707e-03"/>
+        <Coefficient Index="3" Value="-1.2400008230646400e-01"/>
+        <Coefficient Index="4" Value="2.9264502923618770e-02"/>
+      </Weights>
+    </Method>
+    <Method Index="6" Weight="5.2183952619494073e-02" MethodSigCut="4.4090700354816104e-02" MethodSigCutOrientation="1.0000000000000000e+00" MethodTypeName="Fisher" MethodName="BoostedFisher_B0006" JobName="TMVAClassification" Options="~H:~!V:~Boost_Num=20:~Boost_Transform=log:~Boost_Type=AdaBoost:~Boost_AdaBoostBeta=0.2:~!Boost_DetailedMonitoring" UseMainMethodTransformation="true">
+      <Weights NCoeff="5">
+        <Coefficient Index="0" Value="-4.9986899524620140e-02"/>
+        <Coefficient Index="1" Value="1.3225689817934297e-01"/>
+        <Coefficient Index="2" Value="6.1245156665091834e-03"/>
+        <Coefficient Index="3" Value="-1.5247459949248365e-01"/>
+        <Coefficient Index="4" Value="2.7125607637256004e-02"/>
+      </Weights>
+    </Method>
+    <Method Index="7" Weight="4.5624703083335549e-02" MethodSigCut="3.8555508339901245e+00" MethodSigCutOrientation="1.0000000000000000e+00" MethodTypeName="Fisher" MethodName="BoostedFisher_B0007" JobName="TMVAClassification" Options="~H:~!V:~Boost_Num=20:~Boost_Transform=log:~Boost_Type=AdaBoost:~Boost_AdaBoostBeta=0.2:~!Boost_DetailedMonitoring" UseMainMethodTransformation="true">
+      <Weights NCoeff="5">
+        <Coefficient Index="0" Value="-1.4407194662580919e-02"/>
+        <Coefficient Index="1" Value="7.6422983878234388e-02"/>
+        <Coefficient Index="2" Value="4.4576571284971351e-03"/>
+        <Coefficient Index="3" Value="-1.5770279849201985e-01"/>
+        <Coefficient Index="4" Value="3.0834116240322049e-02"/>
+      </Weights>
+    </Method>
+    <Method Index="8" Weight="3.6499764349744515e-02" MethodSigCut="3.6931937197344005e+00" MethodSigCutOrientation="1.0000000000000000e+00" MethodTypeName="Fisher" MethodName="BoostedFisher_B0008" JobName="TMVAClassification" Options="~H:~!V:~Boost_Num=20:~Boost_Transform=log:~Boost_Type=AdaBoost:~Boost_AdaBoostBeta=0.2:~!Boost_DetailedMonitoring" UseMainMethodTransformation="true">
+      <Weights NCoeff="5">
+        <Coefficient Index="0" Value="5.6148972281194059e-03"/>
+        <Coefficient Index="1" Value="8.0437713131378513e-02"/>
+        <Coefficient Index="2" Value="4.4099009944484893e-03"/>
+        <Coefficient Index="3" Value="-1.8114432727538063e-01"/>
+        <Coefficient Index="4" Value="2.8964207150462967e-02"/>
+      </Weights>
+    </Method>
+    <Method Index="9" Weight="3.8280266078046028e-02" MethodSigCut="5.5377607387825156e-02" MethodSigCutOrientation="1.0000000000000000e+00" MethodTypeName="Fisher" MethodName="BoostedFisher_B0009" JobName="TMVAClassification" Options="~H:~!V:~Boost_Num=20:~Boost_Transform=log:~Boost_Type=AdaBoost:~Boost_AdaBoostBeta=0.2:~!Boost_DetailedMonitoring" UseMainMethodTransformation="true">
+      <Weights NCoeff="5">
+        <Coefficient Index="0" Value="2.2992200399333848e-02"/>
+        <Coefficient Index="1" Value="8.3947422193970334e-02"/>
+        <Coefficient Index="2" Value="4.3305184377615069e-03"/>
+        <Coefficient Index="3" Value="-2.0115679077288195e-01"/>
+        <Coefficient Index="4" Value="2.7330557616414196e-02"/>
+      </Weights>
+    </Method>
+    <Method Index="10" Weight="3.4697174116194586e-02" MethodSigCut="5.8108330683662612e-02" MethodSigCutOrientation="1.0000000000000000e+00" MethodTypeName="Fisher" MethodName="BoostedFisher_B0010" JobName="TMVAClassification" Options="~H:~!V:~Boost_Num=20:~Boost_Transform=log:~Boost_Type=AdaBoost:~Boost_AdaBoostBeta=0.2:~!Boost_DetailedMonitoring" UseMainMethodTransformation="true">
+      <Weights NCoeff="5">
+        <Coefficient Index="0" Value="2.2036895784348295e-02"/>
+        <Coefficient Index="1" Value="6.1171358361729447e-02"/>
+        <Coefficient Index="2" Value="3.3704068711167419e-03"/>
+        <Coefficient Index="3" Value="-1.8950434738233715e-01"/>
+        <Coefficient Index="4" Value="3.0618301937578363e-02"/>
+      </Weights>
+    </Method>
+    <Method Index="11" Weight="2.9926895249077677e-02" MethodSigCut="3.6498482857931638e+00" MethodSigCutOrientation="1.0000000000000000e+00" MethodTypeName="Fisher" MethodName="BoostedFisher_B0011" JobName="TMVAClassification" Options="~H:~!V:~Boost_Num=20:~Boost_Transform=log:~Boost_Type=AdaBoost:~Boost_AdaBoostBeta=0.2:~!Boost_DetailedMonitoring" UseMainMethodTransformation="true">
+      <Weights NCoeff="5">
+        <Coefficient Index="0" Value="2.6184051944643641e-02"/>
+        <Coefficient Index="1" Value="4.1651979739875819e-02"/>
+        <Coefficient Index="2" Value="2.2812073609162907e-03"/>
+        <Coefficient Index="3" Value="-1.8077389676743635e-01"/>
+        <Coefficient Index="4" Value="3.3059868483409319e-02"/>
+      </Weights>
+    </Method>
+    <Method Index="12" Weight="2.3941514751591300e-02" MethodSigCut="3.5176413012576409e+00" MethodSigCutOrientation="1.0000000000000000e+00" MethodTypeName="Fisher" MethodName="BoostedFisher_B0012" JobName="TMVAClassification" Options="~H:~!V:~Boost_Num=20:~Boost_Transform=log:~Boost_Type=AdaBoost:~Boost_AdaBoostBeta=0.2:~!Boost_DetailedMonitoring" UseMainMethodTransformation="true">
+      <Weights NCoeff="5">
+        <Coefficient Index="0" Value="3.8998645995861655e-02"/>
+        <Coefficient Index="1" Value="4.2767560970256038e-02"/>
+        <Coefficient Index="2" Value="2.1807084485236826e-03"/>
+        <Coefficient Index="3" Value="-1.9460177086732236e-01"/>
+        <Coefficient Index="4" Value="3.1723532064260498e-02"/>
+      </Weights>
+    </Method>
+    <Method Index="13" Weight="2.4027881297966534e-02" MethodSigCut="4.0493748374523797e-02" MethodSigCutOrientation="1.0000000000000000e+00" MethodTypeName="Fisher" MethodName="BoostedFisher_B0013" JobName="TMVAClassification" Options="~H:~!V:~Boost_Num=20:~Boost_Transform=log:~Boost_Type=AdaBoost:~Boost_AdaBoostBeta=0.2:~!Boost_DetailedMonitoring" UseMainMethodTransformation="true">
+      <Weights NCoeff="5">
+        <Coefficient Index="0" Value="4.9320439121777193e-02"/>
+        <Coefficient Index="1" Value="4.4004542892382016e-02"/>
+        <Coefficient Index="2" Value="2.0955960401934128e-03"/>
+        <Coefficient Index="3" Value="-2.0578309632807668e-01"/>
+        <Coefficient Index="4" Value="3.0598084560266459e-02"/>
+      </Weights>
+    </Method>
+    <Method Index="14" Weight="2.0549062120493129e-02" MethodSigCut="3.5220926427584911e+00" MethodSigCutOrientation="1.0000000000000000e+00" MethodTypeName="Fisher" MethodName="BoostedFisher_B0014" JobName="TMVAClassification" Options="~H:~!V:~Boost_Num=20:~Boost_Transform=log:~Boost_Type=AdaBoost:~Boost_AdaBoostBeta=0.2:~!Boost_DetailedMonitoring" UseMainMethodTransformation="true">
+      <Weights NCoeff="5">
+        <Coefficient Index="0" Value="3.1583548337054332e-02"/>
+        <Coefficient Index="1" Value="4.4872159823956703e-02"/>
+        <Coefficient Index="2" Value="1.7479675577722561e-03"/>
+        <Coefficient Index="3" Value="-1.8762781531744271e-01"/>
+        <Coefficient Index="4" Value="3.2716177619030937e-02"/>
+      </Weights>
+    </Method>
+    <Method Index="15" Weight="1.6439249755291943e-02" MethodSigCut="3.4223723568010400e+00" MethodSigCutOrientation="1.0000000000000000e+00" MethodTypeName="Fisher" MethodName="BoostedFisher_B0015" JobName="TMVAClassification" Options="~H:~!V:~Boost_Num=20:~Boost_Transform=log:~Boost_Type=AdaBoost:~Boost_AdaBoostBeta=0.2:~!Boost_DetailedMonitoring" UseMainMethodTransformation="true">
+      <Weights NCoeff="5">
+        <Coefficient Index="0" Value="3.9508063783364730e-02"/>
+        <Coefficient Index="1" Value="4.6059187675677855e-02"/>
+        <Coefficient Index="2" Value="1.6709015298455986e-03"/>
+        <Coefficient Index="3" Value="-1.9608810524690781e-01"/>
+        <Coefficient Index="4" Value="3.1725911392676033e-02"/>
+      </Weights>
+    </Method>
+    <Method Index="16" Weight="2.0862252671425885e-02" MethodSigCut="3.5177963473963625e-02" MethodSigCutOrientation="1.0000000000000000e+00" MethodTypeName="Fisher" MethodName="BoostedFisher_B0016" JobName="TMVAClassification" Options="~H:~!V:~Boost_Num=20:~Boost_Transform=log:~Boost_Type=AdaBoost:~Boost_AdaBoostBeta=0.2:~!Boost_DetailedMonitoring" UseMainMethodTransformation="true">
+      <Weights NCoeff="5">
+        <Coefficient Index="0" Value="4.5771612860876221e-02"/>
+        <Coefficient Index="1" Value="4.7177377337167085e-02"/>
+        <Coefficient Index="2" Value="1.6086687218422433e-03"/>
+        <Coefficient Index="3" Value="-2.0279466132546825e-01"/>
+        <Coefficient Index="4" Value="3.0912889481139065e-02"/>
+      </Weights>
+    </Method>
+    <Method Index="17" Weight="2.7085488039579220e-02" MethodSigCut="1.2705867130662052e-01" MethodSigCutOrientation="1.0000000000000000e+00" MethodTypeName="Fisher" MethodName="BoostedFisher_B0017" JobName="TMVAClassification" Options="~H:~!V:~Boost_Num=20:~Boost_Transform=log:~Boost_Type=AdaBoost:~Boost_AdaBoostBeta=0.2:~!Boost_DetailedMonitoring" UseMainMethodTransformation="true">
+      <Weights NCoeff="5">
+        <Coefficient Index="0" Value="2.8349113258001837e-02"/>
+        <Coefficient Index="1" Value="4.7258550101399316e-02"/>
+        <Coefficient Index="2" Value="1.3314198645279771e-03"/>
+        <Coefficient Index="3" Value="-1.8318400082894240e-01"/>
+        <Coefficient Index="4" Value="3.2718189157904087e-02"/>
+      </Weights>
+    </Method>
+    <Method Index="18" Weight="1.3988300649666899e-02" MethodSigCut="-3.3298084687822582e-02" MethodSigCutOrientation="1.0000000000000000e+00" MethodTypeName="Fisher" MethodName="BoostedFisher_B0018" JobName="TMVAClassification" Options="~H:~!V:~Boost_Num=20:~Boost_Transform=log:~Boost_Type=AdaBoost:~Boost_AdaBoostBeta=0.2:~!Boost_DetailedMonitoring" UseMainMethodTransformation="true">
+      <Weights NCoeff="5">
+        <Coefficient Index="0" Value="4.5049504303518791e-02"/>
+        <Coefficient Index="1" Value="4.6002268614362185e-02"/>
+        <Coefficient Index="2" Value="4.9289962948936177e-04"/>
+        <Coefficient Index="3" Value="-1.8969428509172956e-01"/>
+        <Coefficient Index="4" Value="3.1273993252095185e-02"/>
+      </Weights>
+    </Method>
+    <Method Index="19" Weight="2.2967033278204950e-02" MethodSigCut="1.2271707271325327e-01" MethodSigCutOrientation="1.0000000000000000e+00" MethodTypeName="Fisher" MethodName="BoostedFisher_B0019" JobName="TMVAClassification" Options="~H:~!V:~Boost_Num=20:~Boost_Transform=log:~Boost_Type=AdaBoost:~Boost_AdaBoostBeta=0.2:~!Boost_DetailedMonitoring" UseMainMethodTransformation="true">
+      <Weights NCoeff="5">
+        <Coefficient Index="0" Value="2.8517493204746822e-02"/>
+        <Coefficient Index="1" Value="4.8000925273882666e-02"/>
+        <Coefficient Index="2" Value="5.2559030897602059e-04"/>
+        <Coefficient Index="3" Value="-1.7239734828355149e-01"/>
+        <Coefficient Index="4" Value="3.2323230039881162e-02"/>
+      </Weights>
+    </Method>
+  </Weights>
+</MethodSetup>

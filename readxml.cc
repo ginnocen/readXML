@@ -26,7 +26,7 @@
 #define BIN_NUM 100
 #define Nsigma 2
 
-TString channel = "Bs_chi2_trkPt";
+TString channel = "Bs_trkPt";
 
 void calRatio(float* results)
 {
@@ -37,7 +37,7 @@ void calRatio(float* results)
   TTree *background;
   TTree *generated;
 
-  if(channel=="Bplus" || channel=="Bplus_chi2" || channel=="Bplus_chi2_trkPt")
+  if(channel=="Bplus" || channel=="Bplus_chi2" || channel=="Bplus_chi2_trkPt" || channel=="Bplus_trkPt")
     {
       inputB = new TFile("/export/d00/scratch/jwang/nt_20140418_PAMuon_HIRun2013_PromptrecoAndRereco_v1_MuonMatching_CandBase_skim.root");
       inputS = new TFile("/export/d00/scratch/jwang/nt_BoostedMC_20140418_Kp_TriggerMatchingMuon_CandBase_skim.root");
@@ -45,7 +45,7 @@ void calRatio(float* results)
       background = (TTree*)inputB->Get("ntKp");
       generated = (TTree*)inputS->Get("ntGen");
     }
-  if(channel=="Bzero_chi2" || channel=="Bzero_tktkmass" || channel=="Bzero_chi2_trkPt")
+  if(channel=="Bzero_chi2" || channel=="Bzero_tktkmass" || channel=="Bzero_chi2_trkPt" || channel=="Bzero_trkPt")
     {
       inputB = new TFile("/export/d00/scratch/jwang/nt_20140418_PAMuon_HIRun2013_PromptrecoAndRereco_v1_MuonMatching_CandBase_skim.root");
       inputS = new TFile("/export/d00/scratch/jwang/nt_BoostedMC_20140418_Kstar_TriggerMatchingMuon_CandBase_skim.root");
@@ -54,7 +54,7 @@ void calRatio(float* results)
       generated = (TTree*)inputS->Get("ntGen");
     }
 
-  if(channel=="Bs" || channel=="Bs_tktkmass" || channel=="Bs_chi2" || channel=="Bs_tktkmass_trkPt" || channel=="Bs_chi2_trkPt")
+  if(channel=="Bs" || channel=="Bs_tktkmass" || channel=="Bs_chi2" || channel=="Bs_tktkmass_trkPt" || channel=="Bs_chi2_trkPt" || channel=="Bs_trkPt")
     {
       inputB = new TFile("/export/d00/scratch/jwang/nt_20140418_PAMuon_HIRun2013_PromptrecoAndRereco_v1_MuonMatching_CandBase_skim.root");
       inputS = new TFile("/export/d00/scratch/jwang/nt_BoostedMC_20140418_Phi_TriggerMatchingMuon_CandBase_skim.root");
@@ -91,6 +91,13 @@ void calRatio(float* results)
       basic_cut_mc="(HLT_PAMu3_v1)&&abs(mumumass-3.096916)<0.15&&abs(y+0.465)<1.93&&(pt>10.)&&isbestchi2&&gen==22233&&trk1Pt>0.9";
       basic_cut_gen="abs(y+0.465)<1.93&&(pt>10.)&&isSignal==1";
     }
+  if(channel=="Bplus_trkPt")
+    {
+      basic_cut_data="(HLT_PAMu3_v1)&&abs(mumumass-3.096916)<0.15&&((Run>=210498&&Run<=211256&&abs(y+0.465)<1.93)||(Run>=211313&&Run<=211631&&abs(y-0.465)<1.93))&&(pt>10.)&&abs(mass-5.279)>0.2&&abs(mass-5.279)<0.3&&trk1Pt>0.9";
+      basic_cut_mc="(HLT_PAMu3_v1)&&abs(mumumass-3.096916)<0.15&&abs(y+0.465)<1.93&&(pt>10.)&&gen==22233&&trk1Pt>0.9";
+      basic_cut_gen="abs(y+0.465)<1.93&&(pt>10.)&&isSignal==1";
+    }
+
 
   if(channel=="Bzero_tktkmass")
     {
@@ -104,6 +111,13 @@ void calRatio(float* results)
       basic_cut_mc="(HLT_PAMu3_v1)&&abs(mumumass-3.096916)<0.15&&abs(y+0.465)<1.93&&(pt>10.)&&isbestchi2&&(gen==22233||gen==41000)&&trk1Pt>0.7&&trk2Pt>0.7";
       basic_cut_gen="abs(y+0.465)<1.93&&(pt>10.)&&(isSignal==4||isSignal==5)";
     }
+  if(channel=="Bzero_trkPt")
+    {
+      basic_cut_data="(HLT_PAMu3_v1)&&abs(mumumass-3.096916)<0.15&&((Run>=210498&&Run<=211256&&abs(y+0.465)<1.93)||(Run>=211313&&Run<=211631&&abs(y-0.465)<1.93))&&(pt>10.)&&abs(mass-5.279)>0.2&&abs(mass-5.279)<0.3&&trk1Pt>0.7&&trk2Pt>0.7";
+      basic_cut_mc="(HLT_PAMu3_v1)&&abs(mumumass-3.096916)<0.15&&abs(y+0.465)<1.93&&(pt>10.)&&(gen==22233||gen==41000)&&trk1Pt>0.7&&trk2Pt>0.7";
+      basic_cut_gen="abs(y+0.465)<1.93&&(pt>10.)&&(isSignal==4||isSignal==5)";
+    }
+
   if(channel=="Bs")
     {
       basic_cut_data="(HLT_PAMu3_v1)&&abs(mumumass-3.096916)<0.15&&((Run>=210498&&Run<=211256&&abs(y+0.465)<1.93)||(Run>=211313&&Run<=211631&&abs(y-0.465)<1.93))&&(pt>10.)&&trk1Pt>0.7&&trk2Pt>0.7&&abs(mass-5.366)>0.2&&abs(mass-5.366)<0.3&&trk1Pt>0.7&&trk2Pt>0.7";
@@ -126,6 +140,12 @@ void calRatio(float* results)
     {
       basic_cut_data="(HLT_PAMu3_v1)&&abs(mumumass-3.096916)<0.15&&((Run>=210498&&Run<=211256&&abs(y+0.465)<1.93)||(Run>=211313&&Run<=211631&&abs(y-0.465)<1.93))&&(pt>10.)&&isbestchi2&&abs(mass-5.366)>0.2&&abs(mass-5.366)<0.3&&trk1Pt>0.7&&trk2Pt>0.7";
       basic_cut_mc="(HLT_PAMu3_v1)&&abs(mumumass-3.096916)<0.15&&abs(y+0.465)<1.93&&(pt>10.)&&isbestchi2&&gen==22233&&trk1Pt>0.7&&trk2Pt>0.7";
+      basic_cut_gen="abs(y+0.465)<1.93&&(pt>10.)&&(isSignal==6)";
+    }
+  if(channel=="Bs_trkPt")
+    {
+      basic_cut_data="(HLT_PAMu3_v1)&&abs(mumumass-3.096916)<0.15&&((Run>=210498&&Run<=211256&&abs(y+0.465)<1.93)||(Run>=211313&&Run<=211631&&abs(y-0.465)<1.93))&&(pt>10.)&&abs(mass-5.366)>0.2&&abs(mass-5.366)<0.3&&trk1Pt>0.7&&trk2Pt>0.7";
+      basic_cut_mc="(HLT_PAMu3_v1)&&abs(mumumass-3.096916)<0.15&&abs(y+0.465)<1.93&&(pt>10.)&&gen==22233&&trk1Pt>0.7&&trk2Pt>0.7";
       basic_cut_gen="abs(y+0.465)<1.93&&(pt>10.)&&(isSignal==6)";
     }
   if(channel=="Bs_chi2")
@@ -208,21 +228,21 @@ void calRatio(float* results)
 
   float effacc=nentriesS*1.0/nentriesG;
   cout<<"nentriesS  "<<nentriesS<<"  nentriesG  "<<nentriesG<<endl;
-  if(channel=="Bplus" || channel=="Bplus_chi2" || channel=="Bplus_chi2_trkPt")
+  if(channel=="Bplus" || channel=="Bplus_chi2" || channel=="Bplus_chi2_trkPt" || channel=="Bplus_trkPt")
     {
       results[0] = nentriesB*Nsigma*sigma/0.1;
       results[1] = yieldBplus*effacc;
       cout<<"# of bkg: "<<nentriesB<<"    eff*acc: "<<effacc<<"  sigma: "<<sigma<<"  fonll expected: "<<yieldBplus<<endl;
       cout<<"background weight: "<<nentriesB*Nsigma*sigma/0.1<<"   signal weight: "<<yieldBplus*effacc<<endl;
     }
-  if(channel=="Bzero_chi2" || channel=="Bzero_tktkmass" || channel=="Bzero_chi2_trkPt")
+  if(channel=="Bzero_chi2" || channel=="Bzero_tktkmass" || channel=="Bzero_chi2_trkPt" || channel=="Bzero_trkPt")
     {
       results[0] = nentriesB*Nsigma*sigma/0.1;
       results[1] = yieldBzero*effacc;
       cout<<"# of bkg: "<<nentriesB<<"    eff*acc: "<<effacc<<"  sigma: "<<sigma<<"  fonll expected: "<<yieldBzero<<endl;
       cout<<"background weight: "<<nentriesB*Nsigma*sigma/0.1<<"   signal weight: "<<yieldBzero*effacc<<endl;
     }
-  if(channel=="Bs" || channel=="Bs_chi2" || channel=="Bs_tktkmass" || channel=="Bs_tktkmass_trkPt" || channel=="Bs_chi2_trkPt")
+  if(channel=="Bs" || channel=="Bs_chi2" || channel=="Bs_tktkmass" || channel=="Bs_tktkmass_trkPt" || channel=="Bs_chi2_trkPt" || channel=="Bs_trkPt")
     {
       results[0] = nentriesB*Nsigma*sigma/0.1;
       results[1] = yieldBs*effacc;
@@ -296,9 +316,9 @@ void readxml()
   csig->SetGrid();
   gsig->Draw("A*");
   TLegend* leg = new TLegend(0.08,0.91,0.15,0.98);
-  if(channel=="Bplus" || channel=="Bplus_chi2" || channel=="Bplus_chi2_trkPt") leg->AddEntry("null", "B^{+}","");
-  if(channel=="Bzero_tktkmass" || channel=="Bzero_chi2" || channel=="Bzero_chi2_trkPt") leg->AddEntry("null", "B^{0}","");
-  if(channel=="Bs" || channel=="Bs_chi2" || channel=="Bs_tktkmass" || channel=="Bs_tktkmass_trkPt" || channel=="Bs_chi2_trkPt") leg->AddEntry("null", "Bs","");
+  if(channel=="Bplus" || channel=="Bplus_chi2" || channel=="Bplus_chi2_trkPt" || channel=="Bplus_trkPt") leg->AddEntry("null", "B^{+}","");
+  if(channel=="Bzero_tktkmass" || channel=="Bzero_chi2" || channel=="Bzero_chi2_trkPt" || channel=="Bzero_trkPt") leg->AddEntry("null", "B^{0}","");
+  if(channel=="Bs" || channel=="Bs_chi2" || channel=="Bs_tktkmass" || channel=="Bs_tktkmass_trkPt" || channel=="Bs_chi2_trkPt" || channel=="Bs_trkPt") leg->AddEntry("null", "Bs","");
   leg->SetFillColor(kWhite);
   leg->Draw();
   csig->SaveAs(Form("plot_%s/sig-eff.pdf",channel.Data()));

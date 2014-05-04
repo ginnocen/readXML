@@ -10,7 +10,7 @@ Method         : Cuts::CutsGA
 TMVA Release   : 4.1.2         [262402]
 ROOT Release   : 5.32/00       [335872]
 Creator        : jwang
-Date           : Sat Apr 19 19:52:03 2014
+Date           : Tue Apr 22 20:01:04 2014
 Host           : Linux lxbuild168.cern.ch 2.6.18-308.16.1.el5 #1 SMP Thu Oct 4 14:02:28 CEST 2012 x86_64 x86_64 x86_64 GNU/Linux
 Dir            : /net/hisrv0001/home/jwang/wTMVA/CMSSW_5_3_8/src/tmva/test
 Training events: 9656
@@ -54,7 +54,7 @@ VarProp[0]: "FMax" [Categorisation of cuts]
 
 NVar 6
 chi2cl                        chi2cl                        chi2cl                        chi2cl                                                          'F'    [0.0101013267413,0.999958574772]
-d0/d0Err                      d0_D_d0Err                    d0/d0Err                      d0/d0Err                                                        'F'    [0.01050747931,235.647094727]
+(d0/d0Err)                    _d0_D_d0Err_                  (d0/d0Err)                    (d0/d0Err)                                                      'F'    [0.01050747931,235.647094727]
 cos(dtheta)                   cos_dtheta_                   cos(dtheta)                   cos(dtheta)                                                     'F'    [-1,1]
 abs(trk1Dxy/trk1D0Err)        abs_trk1Dxy_D_trk1D0Err_      abs(trk1Dxy/trk1D0Err)        abs(trk1Dxy/trk1D0Err)                                          'F'    [0.000159545757924,57.1126785278]
 abs(trk2Dxy/trk2D0Err)        abs_trk2Dxy_D_trk2D0Err_      abs(trk2Dxy/trk2D0Err)        abs(trk2Dxy/trk2D0Err)                                          'F'    [3.46463129972e-05,77.7723770142]
@@ -105,7 +105,7 @@ class ReadCutsGA : public IClassifierReader {
         fIsNormalised( false )
    {      
       // the training input variables
-      const char* inputVars[] = { "chi2cl", "d0/d0Err", "cos(dtheta)", "abs(trk1Dxy/trk1D0Err)", "abs(trk2Dxy/trk2D0Err)", "abs(tktkmass-1.019455)" };
+      const char* inputVars[] = { "chi2cl", "(d0/d0Err)", "cos(dtheta)", "abs(trk1Dxy/trk1D0Err)", "abs(trk2Dxy/trk2D0Err)", "abs(tktkmass-1.019455)" };
 
       // sanity checks
       if (theInputVars.size() <= 0) {

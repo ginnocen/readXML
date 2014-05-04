@@ -10,10 +10,10 @@ Method         : Cuts::CutsGA
 TMVA Release   : 4.1.2         [262402]
 ROOT Release   : 5.32/00       [335872]
 Creator        : jwang
-Date           : Sat Apr 19 15:00:51 2014
+Date           : Wed Apr 23 19:52:47 2014
 Host           : Linux lxbuild168.cern.ch 2.6.18-308.16.1.el5 #1 SMP Thu Oct 4 14:02:28 CEST 2012 x86_64 x86_64 x86_64 GNU/Linux
 Dir            : /net/hisrv0001/home/jwang/wTMVA/CMSSW_5_3_8/src/tmva/test
-Training events: 12232
+Training events: 8987
 Analysis type  : [Classification]
 
 
@@ -47,10 +47,10 @@ VarProp[0]: "FMax" [Categorisation of cuts]
 #VAR -*-*-*-*-*-*-*-*-*-*-*-* variables *-*-*-*-*-*-*-*-*-*-*-*-
 
 NVar 4
-chi2cl                        chi2cl                        chi2cl                        chi2cl                                                          'F'    [0.0100165577605,0.999987125397]
-d0/d0Err                      d0_D_d0Err                    d0/d0Err                      d0/d0Err                                                        'F'    [0.00151297601406,252.324356079]
+chi2cl                        chi2cl                        chi2cl                        chi2cl                                                          'F'    [0.0100478157401,0.999981403351]
+(d0/d0Err)                    _d0_D_d0Err_                  (d0/d0Err)                    (d0/d0Err)                                                      'F'    [0.00151297601406,758.607849121]
 cos(dtheta)                   cos_dtheta_                   cos(dtheta)                   cos(dtheta)                                                     'F'    [-1,1]
-abs(trk1Dxy/trk1D0Err)        abs_trk1Dxy_D_trk1D0Err_      abs(trk1Dxy/trk1D0Err)        abs(trk1Dxy/trk1D0Err)                                          'F'    [0.000157813847181,121.723083496]
+abs(trk1Dxy/trk1D0Err)        abs_trk1Dxy_D_trk1D0Err_      abs(trk1Dxy/trk1D0Err)        abs(trk1Dxy/trk1D0Err)                                          'F'    [0.000162175681908,203.900238037]
 NSpec 0
 
 
@@ -97,7 +97,7 @@ class ReadCutsGA : public IClassifierReader {
         fIsNormalised( false )
    {      
       // the training input variables
-      const char* inputVars[] = { "chi2cl", "d0/d0Err", "cos(dtheta)", "abs(trk1Dxy/trk1D0Err)" };
+      const char* inputVars[] = { "chi2cl", "(d0/d0Err)", "cos(dtheta)", "abs(trk1Dxy/trk1D0Err)" };
 
       // sanity checks
       if (theInputVars.size() <= 0) {
@@ -121,14 +121,14 @@ class ReadCutsGA : public IClassifierReader {
       }
 
       // initialize min and max vectors (for normalisation)
-      fVmin[0] = 0.0100165577605367;
-      fVmax[0] = 0.999987125396729;
+      fVmin[0] = 0.0100478157401085;
+      fVmax[0] = 0.99998140335083;
       fVmin[1] = 0.00151297601405531;
-      fVmax[1] = 252.324356079102;
+      fVmax[1] = 758.607849121094;
       fVmin[2] = -1;
       fVmax[2] = 1;
-      fVmin[3] = 0.000157813847181387;
-      fVmax[3] = 121.723083496094;
+      fVmin[3] = 0.000162175681907684;
+      fVmax[3] = 203.900238037109;
 
       // initialize input variable types
       fType[0] = 'F';

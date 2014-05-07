@@ -42,7 +42,7 @@ TString cutBsB = "(HLT_PAMu3_v1)&&abs(mumumass-3.096916)<0.15&&abs(y-0.465)<1.93
 //TString cutB0B = "pt>10.&&abs(y-0.465)<1.93";
 //TString cutBsB = "pt>10.&&abs(y-0.465)<1.93";
 
-void fbMC()
+void fbMCy()
 {
 
   //TFile* inputB = new TFile("/export/d00/scratch/jwang/nt_20140427_PAMuon_HIRun2013_PromptrecoAndRereco_v1_MuonMatching_CandBase_skim.root");
@@ -69,11 +69,11 @@ void fbMC()
    TTree *genBsF = (TTree*)inputSbsF->Get("ntGen"); 
    TTree *genBsB = (TTree*)inputSbsB->Get("ntGen"); 
 
-   const int nBins=1;
+   const int nBins=4;
    //double ptBins[nBins+1]={10,15,20,25,30,60};
    //double ptBins[nBins+1]={10,15,20,60};
-   double ptBins[nBins+1]={10,60};
-   //double ptBins[nBins+1]={-1.93,-1.0,0,1.0,1.93};
+   //double ptBins[nBins+1]={10,60};
+   double ptBins[nBins+1]={-1.93,-1.0,0,1.0,1.93};
 
    static int count=0;
    count++;
@@ -85,24 +85,24 @@ void fbMC()
 
    if(selection=="Bplus_chi2_trkPt")
      {
-       recoBpF->Project("hMCF","pt",Form("%s&&gen==23333",cutBpF.Data()));
-       genBpF->Project("hGenF","pt","pt>10.&&abs(y+0.465)<1.93&&isSignal==1");
-       recoBpB->Project("hMCB","pt",Form("%s&&gen==23333",cutBpB.Data()));
-       genBpB->Project("hGenB","pt","pt>10.&&abs(y-0.465)<1.93&&isSignal==1");
+       recoBpF->Project("hMCF","y+0.465",Form("%s&&gen==23333",cutBpF.Data()));
+       genBpF->Project("hGenF","y+0.465","pt>10.&&abs(y+0.465)<1.93&&isSignal==1");
+       recoBpB->Project("hMCB","-y+0.465",Form("%s&&gen==23333",cutBpB.Data()));
+       genBpB->Project("hGenB","-y+0.465","pt>10.&&abs(y-0.465)<1.93&&isSignal==1");
      }
    if(selection=="Bzero_chi2_trkPt")
      {
-       recoB0F->Project("hMCF","pt",Form("%s&&(gen==23333||gen==41000)",cutB0F.Data()));
-       genB0F->Project("hGenF","pt","pt>10.&&abs(y+0.465)<1.93&&(isSignal==4||isSignal==5)");
-       recoB0B->Project("hMCB","pt",Form("%s&&(gen==23333||gen==41000)",cutB0B.Data()));
-       genB0B->Project("hGenB","pt","pt>10.&&abs(y-0.465)<1.93&&(isSignal==4||isSignal==5)");
+       recoB0F->Project("hMCF","y+0.465",Form("%s&&(gen==23333||gen==41000)",cutB0F.Data()));
+       genB0F->Project("hGenF","y+0.465","pt>10.&&abs(y+0.465)<1.93&&(isSignal==4||isSignal==5)");
+       recoB0B->Project("hMCB","-y+0.465",Form("%s&&(gen==23333||gen==41000)",cutB0B.Data()));
+       genB0B->Project("hGenB","-y+0.465","pt>10.&&abs(y-0.465)<1.93&&(isSignal==4||isSignal==5)");
      }
    if(selection=="Bs_chi2_trkPt")
      {
-       recoBsF->Project("hMCF","pt",Form("%s&&gen==23333",cutBsF.Data()));
-       genBsF->Project("hGenF","pt","pt>10.&&abs(y+0.465)<1.93&&isSignal==6");
-       recoBsB->Project("hMCB","pt",Form("%s&&gen==23333",cutBsB.Data()));
-       genBsB->Project("hGenB","pt","pt>10.&&abs(y-0.465)<1.93&&isSignal==6");
+       recoBsF->Project("hMCF","y+0.465",Form("%s&&gen==23333",cutBsF.Data()));
+       genBsF->Project("hGenF","y+0.465","pt>10.&&abs(y+0.465)<1.93&&isSignal==6");
+       recoBsB->Project("hMCB","-y+0.465",Form("%s&&gen==23333",cutBsB.Data()));
+       genBsB->Project("hGenB","-y+0.465","pt>10.&&abs(y-0.465)<1.93&&isSignal==6");
      }
 
    hMCF->Sumw2();
@@ -118,7 +118,7 @@ void fbMC()
    hMCF->SetMaximum(1.6);
 
    TCanvas* cB = new TCanvas("cB","",200,10,600,600);
-   hMCF->GetXaxis()->SetTitle("p_{T}/ GeV/c");
+   hMCF->GetXaxis()->SetTitle("y_{CM}");
    hMCF->GetYaxis()->SetTitle("Efficiency pPb/Pbp");
    hMCF->Draw();
    TLegend* leg1p = new TLegend(0.75,0.75,0.85,0.85);
@@ -128,6 +128,6 @@ void fbMC()
    leg1p->SetFillStyle(kWhite);
    leg1p->SetLineColor(kWhite);
    leg1p->Draw();
-   cB->SaveAs(Form("plot_%s/FBeff_cut.png",selection.Data(),count)); 
+   cB->SaveAs(Form("plot_%s/FBeff_y_cut.png",selection.Data(),count)); 
 
 }

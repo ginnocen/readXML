@@ -66,8 +66,8 @@ void reweight_Bs()
    if(selection=="Bs_trkPt")
      {
        BIN_MIN=1;
-       BIN_MAX=9;
-       BIN_NUM=8;
+       BIN_MAX=5;
+       BIN_NUM=4;
      }
 
    TH1D* hcandB = new TH1D("hcandB","",BIN_NUM,BIN_MIN,BIN_MAX);
@@ -116,7 +116,7 @@ void reweight_Bs()
 	     }
 	   if(selection=="Bs_trkPt") 
 	     {
-	       if((HLT_PAMu3_v1)&&abs(mumumass[j]-3.096916)<0.15&&((Run>=210498&&Run<=211256&&abs(y[j]+0.465)<1.93)||(Run>=211313&&Run<=211631&&abs(y[j]-0.465)<1.93))&&(pt[j]>10.)&&trk1Pt[j]>0.7&&trk2Pt[j]>0.7&&chi2cl[j]>3.71e-02&&(d0[j]/d0Err[j])>3.37&&cos(dtheta[j])>2.60e-01&&abs(tktkmass[j]-1.019455)<1.55e-02&&abs(mass[j]-5.366)<0.03) count++;
+	       if((HLT_PAMu3_v1)&&abs(mumumass[j]-3.096916)<0.15&&((Run>=210498&&Run<=211256&&abs(y[j]+0.465)<1.93)||(Run>=211313&&Run<=211631&&abs(y[j]-0.465)<1.93))&&(pt[j]>10.)&&trk1Pt[j]>0.7&&trk2Pt[j]>0.7&&chi2cl[j]>3.71e-02&&(d0[j]/d0Err[j])>3.37&&cos(dtheta[j])>2.60e-01&&abs(tktkmass[j]-1.019455)<1.55e-02) count++;
 	     }
 	 }
        if(count)
@@ -164,7 +164,7 @@ void reweight_Bs()
 	     }
 	   if(selection=="Bs_trkPt") 
 	     {
-	       if((HLT_PAMu3_v1)&&abs(mumumass[j]-3.096916)<0.15&&abs(y[j]+0.465)<1.93&&(pt[j]>10.)&&trk1Pt[j]>0.7&&trk2Pt[j]>0.7&&chi2cl[j]>3.71e-02&&(d0[j]/d0Err[j])>3.37&&cos(dtheta[j])>2.60e-01&&abs(tktkmass[j]-1.019455)<1.55e-02&&abs(mass[j]-5.366)<0.03) count++;
+	       if((HLT_PAMu3_v1)&&abs(mumumass[j]-3.096916)<0.15&&abs(y[j]+0.465)<1.93&&(pt[j]>10.)&&trk1Pt[j]>0.7&&trk2Pt[j]>0.7&&chi2cl[j]>3.71e-02&&(d0[j]/d0Err[j])>3.37&&cos(dtheta[j])>2.60e-01&&abs(tktkmass[j]-1.019455)<1.55e-02) count++;
 	     }
 	 }
        if(count)
@@ -226,7 +226,7 @@ void reweight_Bs()
 	     }
 	   if(selection=="Bs_trkPt") 
 	     {
-	       if((HLT_PAMu3_v1)&&abs(mumumass[j]-3.096916)<0.15&&abs(y[j]+0.465)<1.93&&(pt[j]>10.)&&trk1Pt[j]>0.7&&trk2Pt[j]>0.7&&chi2cl[j]>3.71e-02&&(d0[j]/d0Err[j])>3.37&&cos(dtheta[j])>2.60e-01&&abs(tktkmass[j]-1.019455)<1.55e-02&&abs(mass[j]-5.366)<0.03)
+	       if((HLT_PAMu3_v1)&&abs(mumumass[j]-3.096916)<0.15&&abs(y[j]+0.465)<1.93&&(pt[j]>10.)&&trk1Pt[j]>0.7&&trk2Pt[j]>0.7&&chi2cl[j]>3.71e-02&&(d0[j]/d0Err[j])>3.37&&cos(dtheta[j])>2.60e-01&&abs(tktkmass[j]-1.019455)<1.55e-02)
 		 {
 		   count++;
 		   if(isbestchi2[j]&&gen[j]==23333) matching++;
@@ -248,7 +248,10 @@ void reweight_Bs()
        float passing = heffS->GetBinContent(j+1);
        cout<<(j+1)<<"  "<<total<<"  "<<passing<<endl;
      }
-   heffS->Divide(hcandSeff);
+   
+   heffS->Sumw2();
+   hcandSeff->Sumw2();
+   heffS->Divide(hcandSeff);   
 
    float eff=0,reweighteff=0;
    for(int j=0;j<BIN_NUM;j++)
@@ -269,12 +272,12 @@ void reweight_Bs()
    heffS->GetXaxis()->SetTitle("number of candidate");
    heffS->GetYaxis()->SetTitle("Matching probability");
    heffS->Draw();
-   gStyle->SetHistLineStyle(1);
-   gStyle->SetHistLineColor(kBlue);
-   gStyle->SetHistLineWidth(3);
-   gStyle->SetHistFillStyle(3354);
-   gStyle->SetHistFillColor(kBlue-9);
-   heffS->UseCurrentStyle();
+   //gStyle->SetHistLineStyle(1);
+   //gStyle->SetHistLineColor(kBlue);
+   //gStyle->SetHistLineWidth(3);
+   //gStyle->SetHistFillStyle(3354);
+   //gStyle->SetHistFillColor(kBlue-9);
+   //heffS->UseCurrentStyle();
 
    TLegend* leg1p = new TLegend(0.75,0.85,0.88,0.92);
    if(selection=="Bplus_trkPt") leg1p->AddEntry("NULL","B^{+}","");
@@ -284,7 +287,7 @@ void reweight_Bs()
    leg1p->SetFillStyle(kWhite);
    leg1p->SetLineColor(kWhite);
    leg1p->Draw();
-   cBeff->SaveAs(Form("plot_%s/candidates_eff_sigreg.png",selection.Data()));
+   cBeff->SaveAs(Form("plot_%s/candidates_eff_incl.png",selection.Data()));
 
    TCanvas* cB = new TCanvas("cB","",200,10,600,600);
    hcandS->GetXaxis()->SetTitle("number of candidate");

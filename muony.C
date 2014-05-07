@@ -38,7 +38,6 @@ void checkdimuon(TTree* nt, double ptmin, double ptmax, TString cutB)
    nt->Project("hbmumuB","mumumass",Form("%s&&((Run>=210498&&Run<=211256&&(y+0.465)>%f&&(y+0.465)<%f)||(Run>=211313&&Run<=211631&&(y-0.465)>%f&&(y-0.465)<%f))",cutB.Data(),ptmin,ptmax,ptmin,ptmax));
    nt->Project("hjpsiB","ujmass",Form("%s&&((Run>=210498&&Run<=211256&&(y+0.465)>%f&&(y+0.465)<%f)||(Run>=211313&&Run<=211631&&(y-0.465)>%f&&(y-0.465)<%f))",cutB.Data(),ptmin,ptmax,ptmin,ptmax));
 
-
    float maxy;
    TCanvas* cB = new TCanvas(Form("cB%d",count),"",200,10,600,600);
    if(hbmumuB->GetMaximum()>hjpsiB->GetMaximum()) maxy=hbmumuB->GetMaximum();

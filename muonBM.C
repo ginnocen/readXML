@@ -20,15 +20,15 @@
 
 #define BIN_NUM 10
 
-TString selection="Bplus_chi2_trkPt";
+TString selection="Bs_chi2_trkPt";
 
 TString cutBp = "(HLT_PAMu3_v1)&&abs(mumumass-3.096916)<0.15&&((Run>=210498&&Run<=211256&&abs(y+0.465)<1.93)||(Run>=211313&&Run<=211631&&abs(y-0.465)<1.93))&&(pt>10.)&&isbestchi2&&trk1Pt>0.9&&chi2cl>1.32e-02&&(d0/d0Err)>3.41&&cos(dtheta)>-3.46e-01";
 TString cutB0 = "(HLT_PAMu3_v1)&&abs(mumumass-3.096916)<0.15&&((Run>=210498&&Run<=211256&&abs(y+0.465)<1.93)||(Run>=211313&&Run<=211631&&abs(y-0.465)<1.93))&&(pt>10.)&&isbestchi2&&trk1Pt>0.7&&trk2Pt>0.7&&chi2cl>1.65e-01&&(d0/d0Err)>4.16&&cos(dtheta)>7.50e-01&&abs(tktkmass-0.89594)<2.33e-01";
 TString cutBs = "(HLT_PAMu3_v1)&&abs(mumumass-3.096916)<0.15&&((Run>=210498&&Run<=211256&&abs(y+0.465)<1.93)||(Run>=211313&&Run<=211631&&abs(y-0.465)<1.93))&&(pt>10.)&&isbestchi2&&trk1Pt>0.7&&trk2Pt>0.7&&chi2cl>3.71e-02&&(d0/d0Err)>3.37&&cos(dtheta)>2.60e-01&&abs(tktkmass-1.019455)<1.55e-02";
 
-TString cutBpMC = "(HLT_PAMu3_v1)&&abs(mumumass-3.096916)<0.15&&abs(y+0.465)<1.93&&(pt>10.)&&isbestchi2&&trk1Pt>0.9&&chi2cl>1.32e-02&&(d0/d0Err)>3.41&&cos(dtheta)>-3.46e-01";
-TString cutB0MC = "(HLT_PAMu3_v1)&&abs(mumumass-3.096916)<0.15&&abs(y+0.465)<1.93&&(pt>10.)&&isbestchi2&&trk1Pt>0.7&&trk2Pt>0.7&&chi2cl>1.65e-01&&(d0/d0Err)>4.16&&cos(dtheta)>7.50e-01&&abs(tktkmass-0.89594)<2.33e-01";
-TString cutBsMC = "(HLT_PAMu3_v1)&&abs(mumumass-3.096916)<0.15&&abs(y+0.465)<1.93&&(pt>10.)&&isbestchi2&&trk1Pt>0.7&&trk2Pt>0.7&&chi2cl>3.71e-02&&(d0/d0Err)>3.37&&cos(dtheta)>2.60e-01&&abs(tktkmass-1.019455)<1.55e-02";
+TString cutBpMC = "(HLT_PAMu3_v1)&&abs(mumumass-3.096916)<0.15&&abs(y+0.465)<1.93&&(pt>10.)&&isbestchi2&&trk1Pt>0.9&&chi2cl>1.32e-02&&(d0/d0Err)>3.41&&cos(dtheta)>-3.46e-01&&gen==23333";
+TString cutB0MC = "(HLT_PAMu3_v1)&&abs(mumumass-3.096916)<0.15&&abs(y+0.465)<1.93&&(pt>10.)&&isbestchi2&&trk1Pt>0.7&&trk2Pt>0.7&&chi2cl>1.65e-01&&(d0/d0Err)>4.16&&cos(dtheta)>7.50e-01&&abs(tktkmass-0.89594)<2.33e-01&&(gen==23333||gen==41000)";
+TString cutBsMC = "(HLT_PAMu3_v1)&&abs(mumumass-3.096916)<0.15&&abs(y+0.465)<1.93&&(pt>10.)&&isbestchi2&&trk1Pt>0.7&&trk2Pt>0.7&&chi2cl>3.71e-02&&(d0/d0Err)>3.37&&cos(dtheta)>2.60e-01&&abs(tktkmass-1.019455)<1.55e-02&&gen==23333";
 
 //TString cutBp = "1";
 //TString cutB0 = "1";
@@ -88,7 +88,7 @@ void checkdimuon(TTree* nt, TTree* ntMC, double ptmin, double ptmax, TString cut
    leg1p->SetLineColor(kWhite);
    leg1p->Draw();
 
-   cB->SaveAs(Form("plot_%s/dimuon_DM_%d.png",selection.Data(),count)); 
+   cB->SaveAs(Form("plot_%s/dimuon_DM_incl_%d.png",selection.Data(),count)); 
 
 }
 
@@ -110,10 +110,10 @@ void muonBM()
    TTree *treeSBs = (TTree*)inputSbs->Get("ntphi"); 
 
    
-   const int nBins=5;
-   double ptBins[nBins+1]={10,15,20,25,30,60};
+   const int nBins=1;
+   //double ptBins[nBins+1]={10,15,20,25,30,60};
    //double ptBins[nBins+1]={10,15,20,60};
-   //double ptBins[nBins+1]={10,60};
+   double ptBins[nBins+1]={10,60};
    for(int i=0;i<nBins;i++)
      {
        if(selection=="Bplus_chi2_trkPt") checkdimuon(treeBBp,treeSBp,ptBins[i],ptBins[i+1],cutBp,cutBpMC);

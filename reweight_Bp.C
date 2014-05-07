@@ -54,8 +54,8 @@ void reweight_Bp()
    if(selection=="Bplus_trkPt")
      {
        BIN_MIN=1;
-       BIN_MAX=9;
-       BIN_NUM=8;
+       BIN_MAX=6;
+       BIN_NUM=5;
      }
    if(selection=="Bzero_trkPt")
      {
@@ -249,6 +249,8 @@ void reweight_Bp()
        float passing = heffS->GetBinContent(j+1);
        cout<<(j+1)<<"  "<<total<<"  "<<passing<<endl;
      }
+   heffS->Sumw2();
+   hcandSeff->Sumw2();
    heffS->Divide(hcandSeff);
 
    float eff=0,reweighteff=0;
@@ -270,13 +272,14 @@ void reweight_Bp()
    heffS->GetXaxis()->SetTitle("number of candidate");
    heffS->GetYaxis()->SetTitle("Matching probability");
    heffS->Draw();
+   /*
    gStyle->SetHistLineStyle(1);
    gStyle->SetHistLineColor(kBlue);
    gStyle->SetHistLineWidth(3);
    gStyle->SetHistFillStyle(3354);
    gStyle->SetHistFillColor(kBlue-9);
    heffS->UseCurrentStyle();
-
+   */
    TLegend* leg1p = new TLegend(0.75,0.85,0.88,0.92);
    if(selection=="Bplus_trkPt") leg1p->AddEntry("NULL","B^{+}","");
    if(selection=="Bzero_trkPt") leg1p->AddEntry("NULL","B^{0}","");

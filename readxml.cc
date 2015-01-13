@@ -179,8 +179,8 @@ void calRatio(float* results)
   fmass->SetParameter(1,setparam1);
   fmass->SetParameter(2,setparam2);
   hmassS->Fit("fmass","","",5,6);
-  cmassS->SaveAs(Form("plot_%s/Signal.pdf",channel.Data()));
-  cmassS->SaveAs(Form("plot_%s/Signal.png",channel.Data()));
+  cmassS->SaveAs(Form("plots/plot_%s/Signal.pdf",channel.Data()));
+  cmassS->SaveAs(Form("plots/plot_%s/Signal.png",channel.Data()));
   float sigma=fmass->GetParameter(2);
 
   //Background
@@ -188,8 +188,8 @@ void calRatio(float* results)
   hmassB->GetYaxis()->SetTitle("Entries");
   TCanvas* cmassB = new TCanvas("cmassB","",200,10,600,600);
   hmassB->Draw();
-  cmassB->SaveAs(Form("plot_%s/Background.pdf",channel.Data()));
-  cmassB->SaveAs(Form("plot_%s/Background.png",channel.Data()));
+  cmassB->SaveAs(Form("plots/plot_%s/Background.pdf",channel.Data()));
+  cmassB->SaveAs(Form("plots/plot_%s/Background.png",channel.Data()));
 
   nentriesB = hmassB->GetEntries();
   nentriesS = hmassS->GetEntries();
@@ -321,6 +321,6 @@ void readxml()
   if(channel=="Bs" || channel=="Bs_chi2" || channel=="Bs_tktkmass" || channel=="Bs_tktkmass_trkPt" || channel=="Bs_chi2_trkPt" || channel=="Bs_trkPt") leg->AddEntry("null", "Bs","");
   leg->SetFillColor(kWhite);
   leg->Draw();
-  csig->SaveAs(Form("plot_%s/sig-eff.pdf",channel.Data()));
-  csig->SaveAs(Form("plot_%s/sig-eff.png",channel.Data()));
+  csig->SaveAs(Form("plots/plot_%s/sig-eff.pdf",channel.Data()));
+  csig->SaveAs(Form("plots/plot_%s/sig-eff.png",channel.Data()));
 }

@@ -26,7 +26,7 @@
 #define BIN_NUM 100
 #define Nsigma 2
 
-TString channel = "Dzero_pp";
+TString channel = "Dzero_PbPb";
 
 void calRatio(float* results)
 {
@@ -46,6 +46,15 @@ void calRatio(float* results)
       generated = (TTree*)inputS->Get("gendmesontree");
     }
 
+  if(channel=="Dzero_PbPb")
+    {
+      inputB = new TFile("/afs/cern.ch/work/j/jisun/public/Dmesonana/Dmesonana_Rereco_MBtrig_d0pt3p0_d1p8_pt1p5_v1_tight_1213_6lumi_cuts_v1.root");
+      inputS = new TFile("/afs/cern.ch/work/j/jisun/public/Dmesonana/Dmesonana_hiforest_PbPb_Pyquen_D0embedded_D0pt3_pthat015305080_1217_1223_all_v1.root");
+      signal = (TTree*)inputS->Get("recodmesontree");
+      background = (TTree*)inputB->Get("recodmesontree");
+      generated = (TTree*)inputS->Get("gendmesontree");
+    }
+
   int i,j;
   int nentriesS,nentriesB,nentriesG;
   double maxy;
@@ -56,13 +65,19 @@ void calRatio(float* results)
 
   if(channel=="Dzero_pp")
     {
-      basic_cut_data="MinBias&&dcandeta>-2.0&&dcandeta<2.0&&dcandpt>3.0&&dcanddau1pt>0.5&&dcanddau2pt>0.5&&abs(dcandmass-1.864)>0.1&&abs(dcandmass-1.864)<0.15";
-      basic_cut_mc="MinBias&&dcandeta>-2.0&&dcandeta<2.0&&dcandpt>3.0&&dcanddau1pt>0.5&&dcanddau2pt>0.5&&matchedtogen!=0";
+      basic_cut_data="dcandeta>-2.0&&dcandeta<2.0&&dcandpt>3.0&&dcanddau1pt>0.5&&dcanddau2pt>0.5&&abs(dcandmass-1.864)>0.1&&abs(dcandmass-1.864)<0.15";
+      basic_cut_mc="dcandeta>-2.0&&dcandeta<2.0&&dcandpt>3.0&&dcanddau1pt>0.5&&dcanddau2pt>0.5&&matchedtogen!=0";
+      basic_cut_gen="deta>-2&&deta<2&&dpt>3.0";
+    }
+  if(channel=="Dzero_PbPb")
+    {
+      basic_cut_data="dcandeta>-2.0&&dcandeta<2.0&&dcandpt>3.0&&dcanddau1pt>1.5&&dcanddau2pt>1.5&&abs(dcandmass-1.864)>0.1&&abs(dcandmass-1.864)<0.15";
+      basic_cut_mc="MinBias&&dcandeta>-2.0&&dcandeta<2.0&&dcandpt>3.0&&dcanddau1pt>1.5&&dcanddau2pt>1.5&&(matchedtogen&&nongendoublecounted)&&dcandffls3d>2.&&dcandfprob>0.08";
       basic_cut_gen="deta>-2&&deta<2&&dpt>3.0";
     }
 
   //Fill histogram
-  TH1D* hmassS = new TH1D("hmassS","",50,1.4,2.6);
+  TH1D* hmassS = new TH1D("hmassS","",50,1.6,2.2);
   TH1D* hmassG = new TH1D("hmassG","",50,-10,10);
   TH1D* hmassB = new TH1D("hmassB","",50,0,10);
   background->Project("hmassB","dcandmass",basic_cut_data.Data());
@@ -78,11 +93,13 @@ void calRatio(float* results)
   fmass->SetParLimits(2,0.005,0.05);
   fmass->SetParLimits(3,0,1);
   double setparam1=1.86;
-  double setparam2=0.02;
-  double setparam4=0.1;
+  double setparam2=0.01;
+  double setparam4=0.08;
   fmass->SetParameter(1,setparam1);
   fmass->SetParameter(2,setparam2);
-  hmassS->Fit("fmass","","",1.4,2.6);
+  fmass->SetParameter(4,setparam4);
+  fmass->FixParameter(3,1);
+  hmassS->Fit("fmass","","",1.6,2.2);
   cmassS->SaveAs(Form("plots/plot_%s/Signal.pdf",channel.Data()));
   cmassS->SaveAs(Form("plots/plot_%s/Signal.png",channel.Data()));
   float sigma=fmass->GetParameter(2);
@@ -125,7 +142,8 @@ void calRatio(float* results)
   for(i=4;i<393;i++)
     {
       //yieldBplus+=central[i]*(35.e-3)*0.401*208*(6.09604e-5)*0.25;
-      yieldDzero_pp+=central[i]*5.4*0.0387*0.25;
+      if(channel=="Dzero_pp") yieldDzero_pp+=central[i]*5.4*0.0387*0.25;
+      if(channel=="Dzero_PbPb") yieldDzero_pp+=central[i]*5.4*0.0387*0.25*5.65*7660;
       //yieldDzero_PbPb+=central[i]*0.0387*5.65*(10.e-6)*0.25;
     }
 
@@ -135,9 +153,17 @@ void calRatio(float* results)
     {
       results[0] = nentriesB*Nsigma*sigma/0.05;
       results[1] = yieldDzero_pp*effacc;
-      cout<<"# of bkg: "<<nentriesB<<"    eff*acc: "<<effacc<<"  sigma: "<<sigma<<"  fonll expected: "<<yieldDzero_pp<<endl;
-      cout<<"background weight: "<<nentriesB*Nsigma*sigma/0.1<<"   signal weight: "<<yieldDzero_pp*effacc<<endl;
+      cout<<setw(10)<<"# of bkg:"<<setw(5)<<nentriesB<<setw(10)<<"eff*acc:"<<setw(5)<<effacc<<setw(10)<<"sigma:"<<setw(5)<<sigma<<setw(16)<<"fonll expected:"<<setw(7)<<yieldDzero_pp<<endl;
+      cout<<setw(10)<<"background weight:"<<setw(5)<<nentriesB*Nsigma*sigma/0.05<<setw(10)<<"signal weight:"<<setw(5)<<yieldDzero_pp*effacc<<endl;
     }
+  if(channel=="Dzero_PbPb")
+    {
+      results[0] = nentriesB*Nsigma*sigma/0.05;
+      results[1] = yieldDzero_pp*effacc;
+      cout<<setw(10)<<"# of bkg:"<<setw(5)<<nentriesB<<setw(10)<<"eff*acc:"<<setw(5)<<effacc<<setw(10)<<"sigma:"<<setw(5)<<sigma<<setw(16)<<"fonll expected:"<<setw(7)<<yieldDzero_pp<<endl;
+      cout<<setw(10)<<"background weight:"<<setw(5)<<nentriesB*Nsigma*sigma/0.05<<setw(10)<<"signal weight:"<<setw(5)<<yieldDzero_pp*effacc<<endl;
+    }
+  
 }
 
 void readxml()
@@ -175,7 +201,7 @@ void readxml()
   calRatio(weights);
   wSignal = weights[1];
   wBackground = weights[0];
-  cout<<"wSignal: "<<wSignal<<"  wBackground: "<<wBackground<<endl;
+  cout<<setw(10)<<"wSignal:"<<setw(5)<<wSignal<<setw(10)<<"wBackground:"<<setw(5)<<wBackground<<endl;
 
   double max;
   int maxindex;
@@ -210,4 +236,5 @@ void readxml()
   leg->Draw();
   csig->SaveAs(Form("plots/plot_%s/sig-eff.pdf",channel.Data()));
   csig->SaveAs(Form("plots/plot_%s/sig-eff.png",channel.Data()));
+
 }

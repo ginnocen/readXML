@@ -3,6 +3,10 @@
 //for analysis
 #define NPT  11
 double ptbins[NPT+1] = {0,4.5,5.5,7,9,11,13,16,20,28,40,100};
+
+//Raa[i] corresponds to ptbins[i+1] and ptbins[i+2]
+double RaaValues[NPT-2] = {0.395316, 0.431103, 0.374816, 0.38176, 0.477819, 0.437075, 0.474356, 0.731914, 1.05754};
+
 //double ptbins[NPT+1] = {0,3.5,4.5,5.5,7,9,11,13,16,20,28,40};
 
 //#define NPT 6

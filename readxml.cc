@@ -22,6 +22,7 @@
 #include "Rtypes.h"
 #include "TF1.h"
 #include <fstream>
+#include "PtBins.h"
 
 #define BIN_NUM 100
 #define Nsigma 2
@@ -29,8 +30,8 @@
 const int Nmax = 1000;
 
 TString channel = "Dzero_PbPb";
-Float_t ptmin = 9;;
-Float_t ptmax = 11;
+Float_t ptmin = 11;;
+Float_t ptmax = 13;
 
 TString basic_cut = "dcandeta>-2.0&&dcandeta<2.0&&dcanddau1pt>1.5&&dcanddau2pt>1.5&&dcandfprob>0.08&&dcandfchi2<3&&dcandcosalpha>0.975&&dcandffls3d>2.0";
 TString basic_cut_gen = "deta>-2&&deta<2";
@@ -110,6 +111,13 @@ void calRatio(float* results)
   cout<<"basic_cut_data: "<<basic_cut_data<<endl<<endl;
   cout<<"basic_cut_mc: "  <<basic_cut_mc<<endl<<endl;
   cout<<"basic_cut_gen: " <<basic_cut_gen<<endl<<endl;
+
+  //get Raa
+  double ptavg = (ptmax+ptmin)/2;  int ptbin = 0;
+  for (int i=0;i<NPT;i++) if (abs(ptavg-ptbins[i])<abs(ptavg - ptbins[ptbin])) ptbin = i;
+  double Raa = RaaValues[ptbin-1]; 
+  cout<<"Pt: ["<<ptmin<<","<<ptmax<<"], Raa "<<Raa<<endl;
+
 
   //Fill histogram
   TH1D* hmassS = new TH1D("hmassS","",50,1.6,2.2);
@@ -203,6 +211,8 @@ void calRatio(float* results)
 
   yieldDzero_pp*=(1.e-9)*BR*deltapt*Taa*nevent; 
   yieldDzero*=(1.e-9)*BR*deltapt*Taa * nevent; //sigma_pp * Taa = yield per MB event
+
+  yieldDzero*=Raa;
 
   float effacc=nentriesS*1.0/nentriesG;
   std::cout<<"yield "<<yieldDzero<<" yieldDzero_pp*effacc "<<yieldDzero_pp*effacc<< std::endl;

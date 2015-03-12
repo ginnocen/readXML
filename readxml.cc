@@ -23,7 +23,7 @@
 #include "Rtypes.h"
 #include "TF1.h"
 #include <fstream>
-#include "PtBins.h"
+#include "PtBins.h"//Modify cuts series
 
 #define BIN_NUM 100
 #define Nsigma 2
@@ -32,11 +32,11 @@ Bool_t verbose = false;
 const int Nmax = 1000;
 
 TString channel = "Dzero_PbPb";
-TString func = "AlphaSA";
-Float_t ptmin = 7.;
-Float_t ptmax = 9.;
+TString func = "AlphaSA";//AlphaSA,SA,Jian
+Float_t ptmin = 4.5;
+Float_t ptmax = 5.;
 
-TString basic_cut = "dcandeta>-2.0&&dcandeta<2.0&&dcanddau1pt>1.5&&dcanddau2pt>1.5";
+TString basic_cut = "dcandeta>-2.0&&dcandeta<2.0&&dcanddau1pt>1.5&&dcanddau2pt>1.5 && dcandffls3d>2.&&TMath::ACos(dcandcosalpha)<0.7&&dcandfprob>0.05";
 TString basic_cut_gen = "deta>-2&&deta<2";
 
 float central[Nmax],pt[Nmax];
@@ -71,6 +71,9 @@ void calRatio(float* results)
   TTree *signal = 0;
   TTree *background = 0;
   TTree *generated = 0;
+
+  //ofstream fout;
+  //fout.open(Form("cuts/cut_%s/%s/cuts_%.1f_%.1f.txt",channel.Data(),func.Data(),ptmin,ptmax));
 
   if(channel=="Dzero_pp")
     {
@@ -134,6 +137,11 @@ void calRatio(float* results)
   cout<<" │ "<<setiosflags(ios::left)<<setw(10)<<"Raa"<<" | "<<setiosflags(ios::left)<<setw(26)<<Raa<<" | "<<setiosflags(ios::left)<<setw(6)<<" "<<" |"<<endl;
   cout<<" ╘════════════╧════════════════════════════╧════════╛"<<endl;
   cout<<endl;
+  //fout<<" │ "<<setiosflags(ios::left)<<setw(10)<<"Pt"<<" │ "<<setiosflags(ios::left)<<setw(26)<<ptstring<<" | "<<setiosflags(ios::left)<<setw(6)<<" "<<" |"<<endl;
+  //fout<<" ├────────────┼────────────────────────────┼────────┤"<<endl;
+  //fout<<" │ "<<setiosflags(ios::left)<<setw(10)<<"Raa"<<" | "<<setiosflags(ios::left)<<setw(26)<<Raa<<" | "<<setiosflags(ios::left)<<setw(6)<<" "<<" |"<<endl;
+  //fout<<" ╘════════════╧════════════════════════════╧════════╛"<<endl;
+  //fout<<endl;
 
   //Fill histogram
   TH1D* hmassS = new TH1D("hmassS","",50,1.6,2.2);
@@ -236,11 +244,22 @@ void calRatio(float* results)
   cout<<" ├────────────┼────────────┼────────────┼───────────┤"<<endl;
   cout<<" │ "<<setiosflags(ios::left)<<setw(10)<<"SigWeight"<<" | "<<setiosflags(ios::left)<<setw(10)<<yieldDzero<<" | "<<setiosflags(ios::left)<<setw(10)<<"BkgWeight"<<" | "<<setiosflags(ios::left)<<setw(9)<<nentriesB*Nsigma*sigma/0.05<<" |"<<endl;
   cout<<" ╘════════════╧════════════╧════════════╧═══════════╛"<<endl;
-
+  //fout<<endl;
+  //fout<<" ╒══════════════════════════════════════════════════╕"<<endl;
+  //fout<<" |                   Weight Result                  |"<<endl;
+  //fout<<" ├────────────┬────────────┬────────────┬───────────┤"<<endl;
+  //fout<<" │ "<<setiosflags(ios::left)<<setw(10)<<"Bkg #"<<" | "<<setiosflags(ios::left)<<setw(10)<<nentriesB<<" | "<<setiosflags(ios::left)<<setw(10)<<"Sig reg"<<" | "<<setiosflags(ios::left)<<setw(9)<<setprecision(3)<<sigma*Nsigma*2<<" |"<<endl;
+  //fout<<" ├────────────┼────────────┼────────────┼───────────┤"<<endl;
+  //fout<<" │ "<<setiosflags(ios::left)<<setw(10)<<"SigWeight"<<" | "<<setiosflags(ios::left)<<setw(10)<<yieldDzero<<" | "<<setiosflags(ios::left)<<setw(10)<<"BkgWeight"<<" | "<<setiosflags(ios::left)<<setw(9)<<nentriesB*Nsigma*sigma/0.05<<" |"<<endl;
+  //fout<<" ╘════════════╧════════════╧════════════╧═══════════╛"<<endl;
+  //fout.close();
 }
 
 void readxml()
 {
+  //ofstream fout();
+  //fout.open("cuts/test.txt");
+
   //read weight file
   const char* filename = Form("weights/%s/TMVAClassification_CutsSA.weights.xml",channel.Data());
   void *doc = TMVA::gTools().xmlengine().ParseFile(filename,TMVA::gTools().xmlenginebuffersize());
@@ -252,6 +271,11 @@ void readxml()
   cout<<" |               Cut Opt Configuration              |"<<endl;
   cout<<" ├────────────┬────────────────────────────┬────────┤"<<endl;
   cout<<" │ "<<setiosflags(ios::left)<<setw(10)<<"Method"<<" | "<<setiosflags(ios::left)<<setw(26)<<fullMethodName<<" | "<<setiosflags(ios::left)<<setw(6)<<" "<<" |"<<endl;
+  //fout<<endl;
+  //fout<<" ╒══════════════════════════════════════════════════╕"<<endl;
+  //fout<<" |               Cut Opt Configuration              |"<<endl;
+  //fout<<" ├────────────┬────────────────────────────┬────────┤"<<endl;
+  //fout<<" │ "<<setiosflags(ios::left)<<setw(10)<<"Method"<<" | "<<setiosflags(ios::left)<<setw(26)<<fullMethodName<<" | "<<setiosflags(ios::left)<<setw(6)<<" "<<" |"<<endl;
 
   void *opts = TMVA::gTools().GetChild(rootnode,"Options");
   void* opt = TMVA::gTools().GetChild(opts,"Option");
@@ -287,10 +311,13 @@ void readxml()
       varval[k] = varname;
       cout<<" ├────────────┼────────────────────────────┼────────┤"<<endl;
       cout<<" │ "<<setiosflags(ios::left)<<setw(10)<<tem<<" | "<<setiosflags(ios::left)<<setw(26)<<varname<<" | "<<setiosflags(ios::left)<<setw(6)<<margins[k]<<" |"<<endl;
+      //fout<<" ├────────────┼────────────────────────────┼────────┤"<<endl;
+      //fout<<" │ "<<setiosflags(ios::left)<<setw(10)<<tem<<" | "<<setiosflags(ios::left)<<setw(26)<<varname<<" | "<<setiosflags(ios::left)<<setw(6)<<margins[k]<<" |"<<endl;
       var = TMVA::gTools().GetNextChild(var);
       varnames.push_back(varname);
     }
   cout<<" ╞════════════╪════════════════════════════╪════════╡"<<endl;
+  //fout<<" ╞════════════╪════════════════════════════╪════════╡"<<endl;
     
   void* weight = TMVA::gTools().GetChild(rootnode,"Weights");
   void* eff = TMVA::gTools().GetChild(weight,"Bin");
@@ -329,14 +356,19 @@ void readxml()
   float wSignal=0;
   float wBackground=0;
   float* weights = new float[2];
+  //fout.close();
   //
   calRatio(weights);
   //
+  //fout.open(Form("cuts/cut_%s/%s/cuts_%.1f_%.1f.txt",channel.Data(),func.Data(),ptmin,ptmax));
+  //fout.open("cuts/test.txt");
   cout<<endl;
+  //fout<<endl;
   wSignal = weights[1];
   wBackground = weights[0];
 
   cout<<"Looking for max significance ..."<<endl;
+  //fout<<"Looking for max significance ..."<<endl;
 
   double max = 0;
   int maxindex = 0;
@@ -361,18 +393,25 @@ void readxml()
   cout<<" ├────────────┬────────────┬────────────┬───────────┤"<<endl;
   cout<<" │ "<<setiosflags(ios::left)<<setw(10)<<"Sig eff"<<" | "<<setiosflags(ios::left)<<setw(10)<<effS[maxindex]<<" | "<<setiosflags(ios::left)<<setw(10)<<"Signi"<<" | "<<setiosflags(ios::left)<<setw(9)<<max<<" |"<<endl;
   cout<<" ├────────────┴────────────┴───┬────────┴───────────┤"<<endl;
+  //fout<<endl;
+  //fout<<" ╒══════════════════════════════════════════════════╕"<<endl;
+  //fout<<" |                     Opt Result                   |"<<endl;
+  //fout<<" ├────────────┬────────────┬────────────┬───────────┤"<<endl;
+  //fout<<" │ "<<setiosflags(ios::left)<<setw(10)<<"Sig eff"<<" | "<<setiosflags(ios::left)<<setw(10)<<effS[maxindex]<<" | "<<setiosflags(ios::left)<<setw(10)<<"Signi"<<" | "<<setiosflags(ios::left)<<setw(9)<<max<<" |"<<endl;
+  //fout<<" ├────────────┴────────────┴───┬────────┴───────────┤"<<endl;
   int m;
   for(m=0;m<3;m++)
     {
       if(m) cout<<" ├─────────────────────────────┼────────────────────┤"<<endl;
       cout<<" │ "<<setiosflags(ios::left)<<setw(27)<<varval[m]<<" | "<<setiosflags(ios::left)<<setw(18)<<cutval[m].at(maxindex)<<" |"<<endl;
+      //if(m) fout<<" ├─────────────────────────────┼────────────────────┤"<<endl;
+      //fout<<" │ "<<setiosflags(ios::left)<<setw(27)<<varval[m]<<" | "<<setiosflags(ios::left)<<setw(18)<<cutval[m].at(maxindex)<<" |"<<endl;
     }
   cout<<" ╘═════════════════════════════╧════════════════════╛"<<endl;
-
-  //cout<<"maxindex: "<<effS[maxindex]<<"  max:"<<max<<endl;
-  //cout<<"Best cut: "<<basic_cut<<cuts[maxindex]<<endl;
   cout<<endl;
-
+  //fout<<" ╘═════════════════════════════╧════════════════════╛"<<endl;
+  //fout<<endl;
+  //fout.close();
   TGraph* gsig = new TGraph(100,effS,effSig);
   gsig->SetTitle("");
   TCanvas* csig = new TCanvas("c1","",200,100,600,600);
@@ -382,6 +421,6 @@ void readxml()
   if(channel=="Dzero_pp") leg->AddEntry("null", "D^{0}","");
   leg->SetFillColor(kWhite);
   leg->Draw();
-  csig->SaveAs(Form("plots/plot_%s/%s/sig-eff_%.1f_%.1f.pdf",channel.Data(),func.Data(),ptmin,ptmax));
+  csig->SaveAs(Form("plots/plot_%s/sig/%s/sig-eff_%.1f_%.1f.pdf",channel.Data(),func.Data(),ptmin,ptmax));
 
 }
